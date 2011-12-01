@@ -1,0 +1,9 @@
+<!-- BEGIN_INCLUDE(objectstore:store) -->
+<objectstore:store key="mykey" value="#[payload]"/>
+<!-- END_INCLUDE(objectstore:store) -->
+<!-- BEGIN_INCLUDE(objectstore:retrieve) -->
+<objectstore:retrieve key="mykey"/>
+<!-- END_INCLUDE(objectstore:retrieve) -->
+<!-- BEGIN_INCLUDE(objectstore:remove) -->
+<objectstore:remove key="mykey"/>
+<!-- END_INCLUDE(objectstore:remove) -->
