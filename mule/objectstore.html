@@ -111,15 +111,19 @@
       <span id="masthead-title">Mule Object Store Module</span>
     
     <ul id="header-tabs" class="mule">
+    
     	<li id="guide"><a href="../guide/install.html">
 	    	<span class="en">Install Guide</span>
     	</a></li>
+    
     	<li id="java"><a href="../java/packages.html">
-	    	<span class="en">Java API</span>
+	    	<span class="en">Java API Reference</span>
     	</a></li>
+    
     	<li id="mule"><a href="../mule/modules.html">
-	    	<span class="en">Mule API</span>
+	    	<span class="en">Mule API Reference</span>
     	</a></li>
+    
     </ul>
     </div>
     <div id="headerRight">
@@ -224,7 +228,7 @@ Summary:
 <p>Generic module for accessing Object Stores.
  <p/>
  Can be used with Mule default implementations or one can be passed via ref. It allows to store,
- retrieve and remove objects from the store.<br/></p>
+ retrieve and remove objects from the store.</p>
 
 
 </div><!-- jd-descr -->
@@ -401,40 +405,34 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Remove the object with key.
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:remove key="mykey"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:remove key="mykey"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>key</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The identifier of the object to remove.<br/></td>
+                    <td class="jd-descrcol" width="100%">The identifier of the object to remove.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -444,20 +442,22 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The object that was previously stored for the given key<br/></li></ul>
+      <ul class="nolist"><li>The object that was previously stored for the given key</li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
         <tr>
             <th>ObjectStoreException</td>
             <td>if the given key is <code>null</code> or if the store is not
-          available or any other implementation-specific error occurred<br/></td>
+          available or any other implementation-specific error occurred</td>
         </tr>
         <tr>
             <th>ObjectDoesNotExistException</td>
             <td>if no value for the given key was previously stored.
-<br/></td>
+</td>
         </tr>
       </table>
   </div>
@@ -481,40 +481,34 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Retrieve the given Object.
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:retrieve key="mykey"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:retrieve key="mykey"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>key</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The identifier of the object to retrieve.<br/></td>
+                    <td class="jd-descrcol" width="100%">The identifier of the object to retrieve.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -525,24 +519,26 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
       <ul class="nolist"><li>The object associated with the given key. If no object for the given key was found
-         this method throws an <br/>org.mule.api.store.ObjectDoesNotExistException.<br/></li></ul>
+         this method throws an org.mule.api.store.ObjectDoesNotExistException.</li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
         <tr>
             <th>ObjectStoreException</td>
-            <td>if the given key is <code>null</code>.<br/></td>
+            <td>if the given key is <code>null</code>.</td>
         </tr>
         <tr>
             <th>ObjectStoreNotAvaliableException</td>
             <td>if the store is not  available or any other
-                              implementation-specific error occured.<br/></td>
+                              implementation-specific error occured.</td>
         </tr>
         <tr>
             <th>ObjectDoesNotExistException</td>
             <td>if no value for the given key was previously stored.
-<br/></td>
+</td>
         </tr>
       </table>
   </div>
@@ -566,21 +562,23 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Store object
  <p/>
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:store key="mykey" value="#[payload]"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:store key="mykey" value="#[payload]"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>key</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The identifier of the object to store<br/></td>
+                    <td class="jd-descrcol" width="100%">The identifier of the object to store</td>
                 </tr>
                 
                 
@@ -589,7 +587,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>value</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The object to store. If you want this to be the payload then use value-ref="#[payload]".<br/></td>
+                    <td class="jd-descrcol" width="100%">The object to store. If you want this to be the payload then use value-ref="#[payload]".</td>
                 </tr>
                 
                 
@@ -598,26 +596,18 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>overwrite</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want to overwrite the existing object.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want to overwrite the existing object.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -629,23 +619,25 @@ specify which configuration to use.</p>
       </table>
   </div>
   
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
         <tr>
             <th>ObjectStoreException</td>
-            <td>if the given key cannot be stored or is <code>null</code>.<br/></td>
+            <td>if the given key cannot be stored or is <code>null</code>.</td>
         </tr>
         <tr>
             <th>ObjectStoreNotAvaliableException</td>
             <td>if the store is not available or any other
-          implementation-specific error occured.<br/></td>
+          implementation-specific error occured.</td>
         </tr>
         <tr>
             <th>ObjectAlreadyExistsException</td>
             <td>if an attempt is made to store an object for a key
           that already has an object associated. Only thrown if overwrite is false.
-<br/></td>
+</td>
         </tr>
       </table>
   </div>
