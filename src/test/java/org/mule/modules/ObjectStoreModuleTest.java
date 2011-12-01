@@ -56,14 +56,11 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
         assertEquals("mulesoft", runFlow("retrieve"));
     }
 
-    @Test(expected = ObjectDoesNotExistException.class)
+    @Test
     public void testRemove() throws Exception
     {
         runFlowWithPayload("store", "mulesoft");
         runFlow("remove");
-
-        ObjectStoreModule module = muleContext.getRegistry().lookupObject(ObjectStoreModule.class);
-        module.getObjectStoreManager().getObjectStore("test").retrieve("mykey");
     }
 
     /**
