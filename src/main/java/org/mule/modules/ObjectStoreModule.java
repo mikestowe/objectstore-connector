@@ -1,3 +1,12 @@
+/**
+ * Mule Object Store Module
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
 package org.mule.modules;
 
 import org.mule.api.annotations.Configurable;
@@ -95,7 +104,7 @@ public class ObjectStoreModule {
 
     /**
      * Retrieve the given Object.
-     *
+     * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve}
      *
      * @param key The identifier of the object to retrieve.
@@ -115,14 +124,15 @@ public class ObjectStoreModule {
 
     /**
      * Remove the object with key.
-     *
+     * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:remove}
      *
      * @param key The identifier of the object to remove.
      * @return The object that was previously stored for the given key
      * @throws ObjectStoreException if the given key is <code>null</code> or if the store is not
-     *          available or any other implementation-specific error occurred
-     * @throws org.mule.api.store.ObjectDoesNotExistException if no value for the given key was previously stored.
+     *                              available or any other implementation-specific error occurred
+     * @throws org.mule.api.store.ObjectDoesNotExistException
+     *                              if no value for the given key was previously stored.
      */
     @Processor
     public Object remove(String key) throws ObjectStoreException {
