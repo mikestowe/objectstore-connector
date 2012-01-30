@@ -33,8 +33,16 @@
         <objectstore:store key="mykey" value-ref="#[payload]"/>
     </flow>
 
+    <flow name="dualStore">
+        <objectstore:dual-store key="mykey" value-ref="#[payload]"/>
+    </flow>
+
     <flow name="retrieve">
         <objectstore:retrieve key="mykey"/>
+    </flow>
+
+    <flow name="retrieveDefaultValue">
+        <objectstore:retrieve key="mykey2" defaultValue-ref="#[string:muleion]"/>
     </flow>
 
     <flow name="remove">
