@@ -272,6 +272,16 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/objectstore.html#dual-store">&lt;objectstore:dual-store&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Store value using key, and also store key using value.<br/></div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#remove">&lt;objectstore:remove&gt;</a></nobr>
         
         <div class="jd-descrdiv">Remove the object with key.<br/></div>
@@ -280,7 +290,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#retrieve">&lt;objectstore:retrieve&gt;</a></nobr>
         
@@ -290,7 +300,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#store">&lt;objectstore:store&gt;</a></nobr>
         
@@ -392,6 +402,105 @@ specify which configuration to use.</p>
 
 
 
+<A NAME="dual-store"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;objectstore:dual-store&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Store value using key, and also store key using value.
+ <p/>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:dual-store key="mykey" value-ref="#[payload]"/&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+          
+          
+                
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>key</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">The identifier of the object to store</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>value</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">The object to store. If you want this to be the payload then use value-ref="#[payload]".</td>
+                </tr>
+                
+                
+          
+                
+                <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>overwrite</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want to overwrite the existing object.</td>
+                </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Child Elements</h5>
+        <table id="lconfig" class="jd-sumtable">
+          
+          
+            
+          
+            
+          
+            
+          
+      </table>
+  </div>
+  
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
+        <tr>
+            <th>ObjectStoreException</td>
+            <td>if the given key cannot be stored or is <code>null</code>.</td>
+        </tr>
+        <tr>
+            <th>ObjectStoreNotAvaliableException</td>
+            <td>if the store is not available or any other
+          implementation-specific error occured.</td>
+        </tr>
+        <tr>
+            <th>ObjectAlreadyExistsException</td>
+            <td>if an attempt is made to store an object for a key
+          that already has an object associated. Only thrown if overwrite is false.
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="remove"></A>
 
 <div class="jd-details api apilevel-">
@@ -483,7 +592,7 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Retrieve the given Object.
  <p/>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:retrieve key="mykey"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:retrieve key="mykey" defaultValue="myvalue"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -504,6 +613,15 @@ specify which configuration to use.</p>
                 
                 
           
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>defaultValue</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The default value if the key does not exists.</td>
+                </tr>
+                
+                
+          
           
           
         </table>
@@ -512,6 +630,8 @@ specify which configuration to use.</p>
       <h5 class="jd-tagtitle">Child Elements</h5>
         <table id="lconfig" class="jd-sumtable">
           
+          
+            
           
             
           

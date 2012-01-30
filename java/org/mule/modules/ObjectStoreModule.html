@@ -560,6 +560,24 @@ Summary:
             
             
             
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#dualStore(java.lang.String, java.io.Serializable, boolean)">dualStore</a></span>(String key, Serializable value, boolean overwrite)</nobr>
+        
+        <div class="jd-descrdiv">Store value using key, and also store key using value.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             ObjectStoreManager</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -569,7 +587,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -585,7 +603,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -603,7 +621,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -613,7 +631,7 @@ Summary:
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#retrieve(java.lang.String)">retrieve</a></span>(String key)</nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#retrieve(java.lang.String, java.lang.Object)">retrieve</a></span>(String key, Object defaultValue)</nobr>
         
         <div class="jd-descrdiv">Retrieve the given Object.</div>
   
@@ -621,7 +639,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -637,7 +655,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -653,7 +671,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -669,7 +687,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -685,7 +703,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1133,6 +1151,76 @@ From class
 
 
 
+<A NAME="dualStore(java.lang.String, java.io.Serializable, boolean)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">dualStore</span>
+      <span class="normal">(String key, Serializable value, boolean overwrite)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Store value using key, and also store key using value.
+ <p/>
+ </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>key</td>
+          <td>The identifier of the object to store</td>
+        </tr>
+        <tr>
+          <th>value</td>
+          <td>The object to store. If you want this to be the payload then use value-ref="#[payload]".</td>
+        </tr>
+        <tr>
+          <th>overwrite</td>
+          <td>True if you want to overwrite the existing object.</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>ObjectStoreException</td>
+            <td>if the given key cannot be stored or is <code>null</code>.</td>
+        </tr>  
+        <tr>
+            <th>ObjectStoreNotAvaliableException</td>
+            <td>if the store is not available or any other
+          implementation-specific error occured.</td>
+        </tr>  
+        <tr>
+            <th>ObjectAlreadyExistsException</td>
+            <td>if an attempt is made to store an object for a key
+          that already has an object associated. Only thrown if overwrite is false.
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="getObjectStoreManager()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1256,7 +1344,7 @@ From class
 </div>
 
 
-<A NAME="retrieve(java.lang.String)"></A>
+<A NAME="retrieve(java.lang.String, java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1269,7 +1357,7 @@ From class
         Object
       </span>
       <span class="sympad">retrieve</span>
-      <span class="normal">(String key)</span>
+      <span class="normal">(String key, Object defaultValue)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1290,6 +1378,10 @@ From class
         <tr>
           <th>key</td>
           <td>The identifier of the object to retrieve.</td>
+        </tr>
+        <tr>
+          <th>defaultValue</td>
+          <td>The default value if the key does not exists.</td>
         </tr>
       </table>
   </div>
