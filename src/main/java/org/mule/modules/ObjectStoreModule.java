@@ -6,6 +6,7 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.store.ObjectAlreadyExistsException;
+import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.api.store.ObjectStoreManager;
@@ -94,11 +95,54 @@ public class ObjectStoreModule {
     }
 
     /**
-     * Retrieve the given Object.
+     * Store value using key, and also store key using value.
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:dual-store}
      *
+     * @param key       The identifier of the object to store
+     * @param value     The object to store. If you want this to be the payload then use value-ref="#[payload]".
+     * @param overwrite True if you want to overwrite the existing object.
+     * @throws org.mule.api.store.ObjectStoreException
+     *          if the given key cannot be stored or is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
+     *          if the store is not available or any other
+     *          implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectAlreadyExistsException
+     *          if an attempt is made to store an object for a key
+     *          that already has an object associated. Only thrown if overwrite is false.
+     */
+    @Processor
+    public void dualStore(String key, Serializable value, @Optional @Default("false") boolean overwrite) throws ObjectStoreException {
+        try {
+            objectStore.store(key, value);
+        } catch (ObjectAlreadyExistsException e) {
+            if (overwrite) {
+                objectStore.remove(key);
+                objectStore.store(key, value);
+            } else {
+                throw e;
+            }
+        }
+        try {
+            objectStore.store(value, key);
+        } catch (ObjectAlreadyExistsException e) {
+            if (overwrite) {
+                objectStore.remove(value);
+                objectStore.store(value, key);
+            } else {
+                throw e;
+            }
+        }
+
+    }
+
+    /**
+     * Retrieve the given Object.
+     * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve}
      *
-     * @param key The identifier of the object to retrieve.
+     * @param key          The identifier of the object to retrieve.
+     * @param defaultValue The default value if the key does not exists.
      * @return The object associated with the given key. If no object for the given key was found
      *         this method throws an {@link org.mule.api.store.ObjectDoesNotExistException}.
      * @throws ObjectStoreException if the given key is <code>null</code>.
@@ -109,20 +153,32 @@ public class ObjectStoreModule {
      *                              if no value for the given key was previously stored.
      */
     @Processor
-    public Object retrieve(String key) throws ObjectStoreException {
-        return objectStore.retrieve(key);
+    public Object retrieve(String key, @Optional Object defaultValue) throws ObjectStoreException {
+        Object ret = null;
+        try {
+            ret = objectStore.retrieve(key);
+        } catch (ObjectDoesNotExistException ose) {
+            if (defaultValue != null) {
+                return defaultValue;
+            } else {
+                throw ose;
+            }
+        }
+
+        return ret;
     }
 
     /**
      * Remove the object with key.
-     *
+     * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:remove}
      *
      * @param key The identifier of the object to remove.
      * @return The object that was previously stored for the given key
      * @throws ObjectStoreException if the given key is <code>null</code> or if the store is not
-     *          available or any other implementation-specific error occurred
-     * @throws org.mule.api.store.ObjectDoesNotExistException if no value for the given key was previously stored.
+     *                              available or any other implementation-specific error occurred
+     * @throws org.mule.api.store.ObjectDoesNotExistException
+     *                              if no value for the given key was previously stored.
      */
     @Processor
     public Object remove(String key) throws ObjectStoreException {
