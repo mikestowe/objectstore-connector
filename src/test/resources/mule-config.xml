@@ -46,7 +46,10 @@
     </flow>
 
     <flow name="remove">
-        <objectstore:retrieve key="remove"/>
+        <objectstore:remove key="mykey"/>
     </flow>
 
+    <flow name="allKeys">
+        <objectstore:all-keys/>
+    </flow>
 </mule>

@@ -9,6 +9,8 @@
  */
 package org.mule.modules;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.construct.Flow;
@@ -68,6 +70,20 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
         runFlow("remove");
     }
 
+    @Test
+    public void testAllKeys() throws Exception
+    {
+        runFlowWithPayload("store", "mulesoft");
+        Object keys = runFlow("allKeys");
+        
+        assertTrue(keys instanceof List);
+        assertEquals(1, ((List<?>) keys).size());
+        assertEquals("mykey", ((List<?>) keys).get(0));
+        
+        // Remove keys from persistent store for next tests!
+        runFlow("remove");
+    }
+    
     /**
     * Run the flow specified by name
     *

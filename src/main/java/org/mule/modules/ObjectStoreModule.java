@@ -14,6 +14,7 @@ import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.store.ListableObjectStore;
 import org.mule.api.store.ObjectAlreadyExistsException;
 import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
@@ -23,6 +24,7 @@ import org.mule.api.store.ObjectStoreManager;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Generic module for accessing Object Stores.
@@ -194,6 +196,25 @@ public class ObjectStoreModule {
         return objectStore.remove(key);
     }
 
+    /**
+     * Returns a list of all the keys in the store.
+     * <p/>
+     * <i><b>IMPORTANT:</b> Not all stores support this method. If the method is not supported a java.lang.UnsupportedOperationException is thrown</i>
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:all-keys}
+     * 
+     * @return a java.util.List with all the keys in the store.
+     * @throws ObjectStoreException
+     */
+    @Processor
+    public List<Serializable> allKeys() throws ObjectStoreException {
+        if(objectStore instanceof ListableObjectStore) {
+            return ((ListableObjectStore<?>) objectStore).allKeys();
+        } else {
+            throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] does not support the operation allKeys");
+        }
+    }
+    
     public ObjectStoreManager getObjectStoreManager() {
         return objectStoreManager;
     }

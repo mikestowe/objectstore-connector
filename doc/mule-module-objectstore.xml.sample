@@ -10,3 +10,6 @@
 <!-- BEGIN_INCLUDE(objectstore:remove) -->
 <objectstore:remove key="mykey"/>
 <!-- END_INCLUDE(objectstore:remove) -->
+<!-- BEGIN_INCLUDE(objectstore:all-keys) -->
+<objectstore:all-keys/>
+<!-- END_INCLUDE(objectstore:all-keys) -->
