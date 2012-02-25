@@ -72,7 +72,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../favicon.ico" />
 <title>
 
-  RemoveMessageProcessor
+  AllKeysMessageProcessor
 
 
 | Mule Object Store Module
@@ -193,12 +193,12 @@
               
     <li><h2>Classes</h2>
       <ul>
-          <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/AllKeysMessageProcessor.html">AllKeysMessageProcessor</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../java/org/mule/modules/config/AllKeysMessageProcessor.html">AllKeysMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/DualStoreMessageProcessor.html">DualStoreMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/ObjectStoreModuleCapabilitiesAdapter.html">ObjectStoreModuleCapabilitiesAdapter</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/ObjectStoreModuleInjectAdapter.html">ObjectStoreModuleInjectAdapter</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/ObjectStoreModuleLifecycleAdapter.html">ObjectStoreModuleLifecycleAdapter</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../java/org/mule/modules/config/RemoveMessageProcessor.html">RemoveMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/RemoveMessageProcessor.html">RemoveMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/RetrieveMessageProcessor.html">RetrieveMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/modules/config/StoreMessageProcessor.html">StoreMessageProcessor</a></li>
       </ul>
@@ -362,7 +362,7 @@ Summary:
      
     
     class
-<h1>RemoveMessageProcessor</h1>
+<h1>AllKeysMessageProcessor</h1>
 
 
 
@@ -412,7 +412,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.config.RemoveMessageProcessor</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.config.AllKeysMessageProcessor</td>
     </tr>
     
 
@@ -428,7 +428,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>RemoveMessageProcessor invokes the <code><a href="../../../../../java/org/mule/modules/ObjectStoreModule.html#remove(java.lang.String)">remove(java.lang.String)</a></code> method in <code><a href="../../../../../java/org/mule/modules/ObjectStoreModule.html">ObjectStoreModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>AllKeysMessageProcessor invokes the <code><a href="../../../../../java/org/mule/modules/ObjectStoreModule.html#allKeys()">allKeys()</a></code> method in <code><a href="../../../../../java/org/mule/modules/ObjectStoreModule.html">ObjectStoreModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -625,46 +625,24 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#_keyType">_keyType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           ExpressionManager</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#expressionManager">expressionManager</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#expressionManager">expressionManager</a></td>
           <td class="jd-descrcol" width="100%">Mule Expression Manager
  
 </td>
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          FlowConstruct</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#flowConstruct">flowConstruct</a></td>
-          <td class="jd-descrcol" width="100%">Flow construct
- 
-</td>
-      </tr>
-      
-    
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
           
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#key">key</a></td>
-          <td class="jd-descrcol" width="100%"></td>
+          FlowConstruct</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#flowConstruct">flowConstruct</a></td>
+          <td class="jd-descrcol" width="100%">Flow construct
+ 
+</td>
       </tr>
       
     
@@ -674,7 +652,7 @@ org.mule.api.lifecycle.Stoppable
           static
           
           Logger</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#logger">logger</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#logger">logger</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -685,7 +663,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#moduleObject">moduleObject</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#moduleObject">moduleObject</a></td>
           <td class="jd-descrcol" width="100%">Module object
  
 </td>
@@ -698,7 +676,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           MuleContext</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#muleContext">muleContext</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#muleContext">muleContext</a></td>
           <td class="jd-descrcol" width="100%">Mule Context
  
 </td>
@@ -711,7 +689,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           TemplateParser.PatternInfo</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#patternInfo">patternInfo</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#patternInfo">patternInfo</a></td>
           <td class="jd-descrcol" width="100%">Mule Pattern Info
  
 </td>
@@ -724,7 +702,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           AtomicInteger</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#retryCount">retryCount</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#retryCount">retryCount</a></td>
           <td class="jd-descrcol" width="100%">Variable used to track how many retries we have attempted on this message processor
  
 </td>
@@ -737,7 +715,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           int</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#retryMax">retryMax</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#retryMax">retryMax</a></td>
           <td class="jd-descrcol" width="100%">Maximum number of retries that can be attempted.</td>
       </tr>
       
@@ -767,7 +745,7 @@ org.mule.api.lifecycle.Stoppable
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#RemoveMessageProcessor()">RemoveMessageProcessor</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#AllKeysMessageProcessor()">AllKeysMessageProcessor</a></span>()</nobr>
         
   </td></tr>
 
@@ -796,7 +774,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#dispose()">dispose</a></span>()</nobr>
         
   </td></tr>
 
@@ -812,7 +790,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#initialise()">initialise</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#initialise()">initialise</a></span>()</nobr>
         
         <div class="jd-descrdiv">Obtains the expression manager from the Mule context and initialises the connector.</div>
   
@@ -830,7 +808,7 @@ org.mule.api.lifecycle.Stoppable
             MuleEvent</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#process(org.mule.api.MuleEvent)">process</a></span>(MuleEvent event)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#process(org.mule.api.MuleEvent)">process</a></span>(MuleEvent event)</nobr>
         
         <div class="jd-descrdiv">Invokes the MessageProcessor.</div>
   
@@ -848,7 +826,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
         
         <div class="jd-descrdiv">Sets flow construct</div>
   
@@ -866,25 +844,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#setKey(java.lang.Object)">setKey</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets key</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#setModuleObject(java.lang.Object)">setModuleObject</a></span>(Object moduleObject)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#setModuleObject(java.lang.Object)">setModuleObject</a></span>(Object moduleObject)</nobr>
         
         <div class="jd-descrdiv">Sets the instance of the object under which the processor will execute</div>
   
@@ -892,7 +852,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -902,7 +862,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
         
         <div class="jd-descrdiv">Set the Mule context</div>
   
@@ -910,6 +870,24 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#setRetryMax(int)">setRetryMax</a></span>(int value)</nobr>
+        
+        <div class="jd-descrdiv">Sets retryMax</div>
+  
+  </td></tr>
+
+
+	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -920,10 +898,8 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#setRetryMax(int)">setRetryMax</a></span>(int value)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#start()">start</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Sets retryMax</div>
-  
   </td></tr>
 
 
@@ -938,23 +914,7 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#start()">start</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/config/RemoveMessageProcessor.html#stop()">stop</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/config/AllKeysMessageProcessor.html#stop()">stop</a></span>()</nobr>
         
   </td></tr>
 
@@ -1501,36 +1461,6 @@ From interface
 
 
 
-<A NAME="_keyType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        String
-      </span>
-        _keyType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="expressionManager"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1588,36 +1518,6 @@ From interface
   <div class="jd-tagdata jd-tagdescr"><p>Flow construct
  
 </p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="key"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        Object
-      </span>
-        key
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     
     </div>
@@ -1824,7 +1724,7 @@ From interface
 
 
 
-<A NAME="RemoveMessageProcessor()"></A>
+<A NAME="AllKeysMessageProcessor()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1836,7 +1736,7 @@ From interface
          
         
       </span>
-      <span class="sympad">RemoveMessageProcessor</span>
+      <span class="sympad">AllKeysMessageProcessor</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -2022,47 +1922,6 @@ From interface
         <tr>
           <th>flowConstruct</td>
           <td>Flow construct to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setKey(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setKey</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets key</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
 </td>
         </tr>
       </table>

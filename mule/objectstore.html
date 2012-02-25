@@ -272,6 +272,16 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/objectstore.html#all-keys">&lt;objectstore:all-keys&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Returns a list of all the keys in the store.<br/></div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#dual-store">&lt;objectstore:dual-store&gt;</a></nobr>
         
         <div class="jd-descrdiv">Store value using key, and also store key using value.<br/></div>
@@ -280,7 +290,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#remove">&lt;objectstore:remove&gt;</a></nobr>
         
@@ -290,7 +300,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#retrieve">&lt;objectstore:retrieve&gt;</a></nobr>
         
@@ -300,7 +310,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#store">&lt;objectstore:store&gt;</a></nobr>
         
@@ -400,6 +410,67 @@ specify which configuration to use.</p>
 
 <h2>Message Processors</h2>
 
+
+
+<A NAME="all-keys"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;objectstore:all-keys&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns a list of all the keys in the store.
+ <p/>
+ <i><b>IMPORTANT:</b> Not all stores support this method. If the method is not supported a java.lang.UnsupportedOperationException is thrown</i>
+ <p/>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:all-keys/&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+          
+          
+          
+          
+        </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Child Elements</h5>
+        <table id="lconfig" class="jd-sumtable">
+          
+          
+      </table>
+  </div>
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Return Payload</h5>
+      <ul class="nolist"><li>a java.util.List with all the keys in the store.</li></ul>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payload</h5>
+      <table class="jd-tagtable">
+        <tr>
+            <th>ObjectStoreException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
 
 
 <A NAME="dual-store"></A>
