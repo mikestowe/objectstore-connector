@@ -64,6 +64,8 @@
 
 
 
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -85,6 +87,7 @@
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 <script src="../assets/search_autocomplete.js" type="text/javascript"></script>
 <script src="../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../assets/jquery-toc.js" type="text/javascript"></script>
 <script src="../assets/mule-developer-docs.js" type="text/javascript"></script>
 <script src="../assets/prettify.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -101,6 +104,27 @@
     #resize-packages-nav{border-bottom:3px solid #666;}
   </style>
 </noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "Mule Object Store Module";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
 </head>
 
 <body class="">
@@ -196,7 +220,6 @@ Summary:
 <div id="jd-header">
     org.mule.modules
 <h1>mule-module-objectstore</h1>
-    1.0-SNAPSHOT
 
 </div><!-- end header -->
 
@@ -205,15 +228,17 @@ Summary:
 <div id="jd-content" class="api apilevel-">
 
 
+<br/>
+
 <div class="jd-tagdata">
       <table class="jd-tagtable">
         <tbody><tr>
           <th>Namespace</th><td>http://www.mulesoft.org/schema/mule/objectstore</td>
         </tr><tr>
-          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/objectstore/1.0/mule-objectstore.xsd</td>
+          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd&nbsp;&nbsp;(<a href="objectstore-schema.html">View Schema</a>)</td>
         </tr>
 <tr>
-          <th>Version</th><td>1.0</td>
+          <th>Schema Version</th><td>1.0</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -274,7 +299,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#all-keys">&lt;objectstore:all-keys&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Returns a list of all the keys in the store.<br/></div>
+        <div class="jd-descrdiv">Returns a list of all the keys in the store.</div>
         
   </td></tr>
 
@@ -284,7 +309,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#dual-store">&lt;objectstore:dual-store&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Store value using key, and also store key using value.<br/></div>
+        <div class="jd-descrdiv">Store value using key, and also store key using value.</div>
         
   </td></tr>
 
@@ -294,7 +319,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#remove">&lt;objectstore:remove&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Remove the object with key.<br/></div>
+        <div class="jd-descrdiv">Remove the object with key.</div>
         
   </td></tr>
 
@@ -304,7 +329,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore.html#retrieve">&lt;objectstore:retrieve&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Retrieve the given Object.<br/></div>
+        <div class="jd-descrdiv">Retrieve the given Object.</div>
         
   </td></tr>
 
@@ -316,7 +341,7 @@ Summary:
         
         <div class="jd-descrdiv">Store object
  <p/>
- <br/></div>
+ </div>
         
   </td></tr>
 
@@ -334,7 +359,6 @@ Summary:
 </div><!-- jd-descr (summary) -->
 
 
-
 <!-- ========= CONFIGURATION DETAIL ======== -->
 <A NAME="config"></A>
 <h2>Configuration</h2>
@@ -348,14 +372,15 @@ similar to the following:</p>
                http://www.mulesoft.org/schema/mule/core
                http://www.mulesoft.org/schema/mule/core/current/mule.xsd
                http://www.mulesoft.org/schema/mule/objectstore
-               http://www.mulesoft.org/schema/mule/objectstore/1.0/mule-objectstore.xsd"&gt;
+               http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd"&gt;
 
       &lt;!-- here goes your flows and configuration elements --&gt;
 
 &lt;/mule&gt;
 </pre>
+
 <p>This module is configured using the <i>config</i> element. This element must be placed outside of your flows and at
-the root of your Mule application. You can create as many configurations as you deem necesary as long as each carries
+the root of your Mule application. You can create as many configurations as you deem necessary as long as each carries
 its own name.</p>
 <p>Each message processor, message source or transformer carries a <i>config-ref</i> attribute that allows the invoker to
 specify which configuration to use.</p>
@@ -396,6 +421,7 @@ specify which configuration to use.</p>
       
     
 </table>
+
 
 
 
@@ -460,10 +486,12 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th>ObjectStoreException</td>
+            <td>ObjectStoreException</td>
             <td></td>
         </tr>
       </table>
@@ -521,7 +549,7 @@ specify which configuration to use.</p>
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>overwrite</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">false</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want to overwrite the existing object.</td>
                 </tr>
                 
@@ -548,19 +576,21 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th>ObjectStoreException</td>
+            <td>ObjectStoreException</td>
             <td>if the given key cannot be stored or is <code>null</code>.</td>
         </tr>
         <tr>
-            <th>ObjectStoreNotAvaliableException</td>
+            <td>ObjectStoreNotAvaliableException</td>
             <td>if the store is not available or any other
           implementation-specific error occured.</td>
         </tr>
         <tr>
-            <th>ObjectAlreadyExistsException</td>
+            <td>ObjectAlreadyExistsException</td>
             <td>if an attempt is made to store an object for a key
           that already has an object associated. Only thrown if overwrite is false.
 </td>
@@ -629,15 +659,17 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th>ObjectStoreException</td>
+            <td>ObjectStoreException</td>
             <td>if the given key is <code>null</code> or if the store is not
                               available or any other implementation-specific error occurred</td>
         </tr>
         <tr>
-            <th>ObjectDoesNotExistException</td>
+            <td>ObjectDoesNotExistException</td>
             <td>if no value for the given key was previously stored.
 </td>
         </tr>
@@ -717,19 +749,21 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th>ObjectStoreException</td>
+            <td>ObjectStoreException</td>
             <td>if the given key is <code>null</code>.</td>
         </tr>
         <tr>
-            <th>ObjectStoreNotAvaliableException</td>
+            <td>ObjectStoreNotAvaliableException</td>
             <td>if the store is not  available or any other
                               implementation-specific error occured.</td>
         </tr>
         <tr>
-            <th>ObjectDoesNotExistException</td>
+            <td>ObjectDoesNotExistException</td>
             <td>if no value for the given key was previously stored.
 </td>
         </tr>
@@ -788,7 +822,7 @@ specify which configuration to use.</p>
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>overwrite</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">false</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True if you want to overwrite the existing object.</td>
                 </tr>
                 
@@ -815,19 +849,21 @@ specify which configuration to use.</p>
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th>ObjectStoreException</td>
+            <td>ObjectStoreException</td>
             <td>if the given key cannot be stored or is <code>null</code>.</td>
         </tr>
         <tr>
-            <th>ObjectStoreNotAvaliableException</td>
+            <td>ObjectStoreNotAvaliableException</td>
             <td>if the store is not available or any other
           implementation-specific error occured.</td>
         </tr>
         <tr>
-            <th>ObjectAlreadyExistsException</td>
+            <td>ObjectAlreadyExistsException</td>
             <td>if an attempt is made to store an object for a key
           that already has an object associated. Only thrown if overwrite is false.
 </td>

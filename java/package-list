@@ -1,4 +1,6 @@
 org.mule.modules
+org.mule.modules.adapters
 org.mule.modules.config
 org.mule.modules.config.spring
+org.mule.modules.processors
 
