@@ -14,6 +14,8 @@ import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.config.MuleProperties;
+import org.mule.api.registry.Registry;
 import org.mule.api.store.ListableObjectStore;
 import org.mule.api.store.ObjectAlreadyExistsException;
 import org.mule.api.store.ObjectDoesNotExistException;
@@ -62,12 +64,18 @@ public class ObjectStoreModule {
     private ObjectStore objectStore;
 
     @Inject
+    private Registry registry;
+
+    @Inject
     private ObjectStoreManager objectStoreManager;
 
     @PostConstruct
     public void init() {
         if (objectStore == null) {
-            objectStore = objectStoreManager.getObjectStore(partition, persistent);
+            objectStore = registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+            if (objectStore == null) {
+                objectStore = objectStoreManager.getObjectStore(partition, persistent);
+            }
             if (objectStore == null) {
                 throw new IllegalArgumentException("Unable to acquire an object store.");
             }
@@ -202,19 +210,19 @@ public class ObjectStoreModule {
      * <i><b>IMPORTANT:</b> Not all stores support this method. If the method is not supported a java.lang.UnsupportedOperationException is thrown</i>
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:all-keys}
-     * 
+     *
      * @return a java.util.List with all the keys in the store.
      * @throws ObjectStoreException
      */
     @Processor
     public List<Serializable> allKeys() throws ObjectStoreException {
-        if(objectStore instanceof ListableObjectStore) {
+        if (objectStore instanceof ListableObjectStore) {
             return ((ListableObjectStore<?>) objectStore).allKeys();
         } else {
             throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] does not support the operation allKeys");
         }
     }
-    
+
     public ObjectStoreManager getObjectStoreManager() {
         return objectStoreManager;
     }
@@ -233,5 +241,9 @@ public class ObjectStoreModule {
 
     public void setObjectStore(ObjectStore objectStore) {
         this.objectStore = objectStore;
+    }
+
+    public void setRegistry(Registry registry) {
+        this.registry = registry;
     }
 }
