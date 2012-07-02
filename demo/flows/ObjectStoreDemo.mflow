@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="ObjectStoreDemo">
+    <global-element type="http://www.mulesoft.org/schema/mule/objectstore/config" name="Objectstore">
+        <properties>
+            <property value="PartitionOne" name="partition"/>
+            <property value="false" name="persistent"/>
+            <property value="Objectstore" name="name"/>
+            <property value="" name="objectStore-ref"/>
+        </properties>
+        <description></description>
+    </global-element>
+    <flow SubFlow="false" name="ObjectStoreDemoFlow1">
+        <lane hadOnlyOneElement="false">
+            <endpoint message-exchange-pattern="RequestResponse" direction="Inbound" type="http://www.mulesoft.org/schema/mule/https/endpoint" name="HTTP">
+                <properties>
+                    <property value="8081" name="port"/>
+                    <property value="localhost" name="host"/>
+                    <property value="" name="businessEventsLabel"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="false" name="keep-alive"/>
+                    <property value="" name="contentType"/>
+                    <property value="false" name="disableTransportTransformer"/>
+                    <property value="" name="password"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="false" name="tracking:enable-default-events"/>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="" name="httpLabel"/>
+                    <property value="" name="address"/>
+                    <property value="test-object-store" name="path"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="user"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property value="" name="mimeType"/>
+                    <property value="" name="connector-ref"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/objectstore/objectstore-connector" name="Store">
+                <properties>
+                    <property value="false" name="overwrite"/>
+                    <property value="http://www.mulesoft.org/schema/mule/objectstore/store" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Objectstore" name="config-ref"/>
+                    <property value="#[groovy:&quot;NewValue&quot;]" name="value-ref"/>
+                    <property value="NewKey" name="key"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/objectstore/objectstore-connector" name="Retrieve">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/objectstore/retrieve" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="" name="defaultValue-ref"/>
+                    <property value="Objectstore" name="config-ref"/>
+                    <property value="NewKey" name="key"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger">
+                <properties>
+                    <property value="The key value created is: #[payload]" name="message"/>
+                    <property value="" name="category"/>
+                    <property value="INFO" name="level"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/objectstore/objectstore-connector" name="Remove">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/objectstore/remove" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Objectstore" name="config-ref"/>
+                    <property value="NewKey" name="key"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger">
+                <properties>
+                    <property value="The key #[payload] was removed" name="message"/>
+                    <property value="" name="category"/>
+                    <property value="INFO" name="level"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="ObjectStoreDemoFlow2">
+        <lane hadOnlyOneElement="false">
+            <endpoint message-exchange-pattern="RequestResponse" direction="Inbound" type="http://www.mulesoft.org/schema/mule/https/endpoint" name="HTTP">
+                <properties>
+                    <property value="8081" name="port"/>
+                    <property value="localhost" name="host"/>
+                    <property value="" name="businessEventsLabel"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="false" name="keep-alive"/>
+                    <property value="" name="contentType"/>
+                    <property value="false" name="disableTransportTransformer"/>
+                    <property value="" name="password"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="false" name="tracking:enable-default-events"/>
+                    <property value="" name="ref"/>
+                    <property value="" name="transformer-refs"/>
+                    <property value="" name="httpLabel"/>
+                    <property value="" name="address"/>
+                    <property value="retrieve-all-keys" name="path"/>
+                    <property value="" name="encoding"/>
+                    <property value="" name="user"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property value="" name="mimeType"/>
+                    <property value="" name="connector-ref"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/objectstore/objectstore-connector" name="Store">
+                <properties>
+                    <property value="false" name="overwrite"/>
+                    <property value="http://www.mulesoft.org/schema/mule/objectstore/store" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Objectstore" name="config-ref"/>
+                    <property value="#[groovy:&quot;NewValue1&quot;]" name="value-ref"/>
+                    <property value="Key1" name="key"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/objectstore/objectstore-connector" name="Store">
+                <properties>
+                    <property value="false" name="overwrite"/>
+                    <property value="http://www.mulesoft.org/schema/mule/objectstore/store" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Objectstore" name="config-ref"/>
+                    <property value="#[groovy:&quot;NewValue2&quot;]" name="value-ref"/>
+                    <property value="Key2" name="key"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/objectstore/objectstore-connector" name="RetrieveAllKeys">
+                <properties>
+                    <property value="http://www.mulesoft.org/schema/mule/objectstore/all-keys" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="Objectstore" name="config-ref"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/collection-splitter" name="Collection Splitter"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger">
+                <properties>
+                    <property value="Retrieved Key: #[payload]" name="message"/>
+                    <property value="" name="category"/>
+                    <property value="INFO" name="level"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
