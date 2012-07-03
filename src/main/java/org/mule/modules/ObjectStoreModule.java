@@ -1,12 +1,11 @@
 /**
- * Mule Object Store Module
- *
- * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * Copyright (c) MuleSoft, Inc. All rights reserved. http://www.mulesoft.com
  *
  * The software in this package is published under the terms of the CPAL v1.0
  * license, a copy of which has been included with this distribution in the
- * LICENSE.txt file.
+ * LICENSE.md file.
  */
+
 package org.mule.modules;
 
 import org.mule.api.annotations.Configurable;
@@ -39,16 +38,16 @@ import java.util.List;
 @Module(name = "objectstore", schemaVersion = "1.0")
 public class ObjectStoreModule {
     /**
-     * Name of the partition in the default in-memory or persistent object stores. This argument has no
-     * meaning if the object store is passed by ref using objectStore-ref.
+     * Name of the partition in the default in-memory or persistent object stores (this argument has no
+     * meaning if the object store is passed by ref using objectStore-ref)
      */
     @Configurable
     @Optional
     private String partition;
 
     /**
-     * Specified whenever the required store needs to be persistent or not. This argument has no
-     * meaning if the object store is passed by ref using objectStore-ref.
+     * Specified whenever the required store needs to be persistent or not (this argument has no
+     * meaning if the object store is passed by ref using objectStore-ref)
      */
     @Configurable
     @Optional
