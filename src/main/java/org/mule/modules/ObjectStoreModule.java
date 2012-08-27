@@ -211,7 +211,7 @@ public class ObjectStoreModule {
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:all-keys}
      *
      * @return a java.util.List with all the keys in the store.
-     * @throws ObjectStoreException
+     * @throws ObjectStoreException if an exception occurred while collecting the list of all keys.
      */
     @Processor
     public List<Serializable> allKeys() throws ObjectStoreException {
@@ -244,5 +244,21 @@ public class ObjectStoreModule {
 
     public void setRegistry(Registry registry) {
         this.registry = registry;
+    }
+
+    public String getPartition() {
+        return partition;
+    }
+
+    public boolean isPersistent() {
+        return persistent;
+    }
+
+    public ObjectStore getObjectStore() {
+        return objectStore;
+    }
+
+    public Registry getRegistry() {
+        return registry;
     }
 }
