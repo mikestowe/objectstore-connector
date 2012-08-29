@@ -35,7 +35,7 @@ import java.util.List;
  *
  * @author MuleSoft, Inc.
  */
-@Module(name = "objectstore", schemaVersion = "1.0")
+@Module(name = "objectstore", schemaVersion = "1.0", friendlyName = "ObjectStore")
 public class ObjectStoreModule {
     /**
      * Name of the partition in the default in-memory or persistent object stores (this argument has no
