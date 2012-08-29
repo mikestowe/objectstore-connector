@@ -207,9 +207,13 @@
     <li class="api apilevel-">
   <a href="../../../../java/org/mule/modules/adapters/package-summary.html">org.mule.modules.adapters</a></li>
     <li class="api apilevel-">
+  <a href="../../../../java/org/mule/modules/agents/package-summary.html">org.mule.modules.agents</a></li>
+    <li class="api apilevel-">
   <a href="../../../../java/org/mule/modules/config/package-summary.html">org.mule.modules.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../java/org/mule/modules/config/spring/package-summary.html">org.mule.modules.config.spring</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../java/org/mule/modules/process/package-summary.html">org.mule.modules.process</a></li>
     <li class="api apilevel-">
   <a href="../../../../java/org/mule/modules/processors/package-summary.html">org.mule.modules.processors</a></li>
               </ul><br/>
@@ -416,7 +420,11 @@ Summary:
             
               <a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleInjectionAdapter.html">ObjectStoreModuleInjectionAdapter</a>,
             
-              <a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleLifecycleAdapter.html">ObjectStoreModuleLifecycleAdapter</a>
+              <a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleLifecycleAdapter.html">ObjectStoreModuleLifecycleAdapter</a>,
+            
+              <a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleMetadataAdapater.html">ObjectStoreModuleMetadataAdapater</a>,
+            
+              <a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleProcessAdapter.html">ObjectStoreModuleProcessAdapter</a>
             
           
       </div>
@@ -435,6 +443,14 @@ Summary:
         <tr class="alt-color api apilevel-" >
               <td class="jd-linkcol"><a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleLifecycleAdapter.html">ObjectStoreModuleLifecycleAdapter</a></td>
               <td class="jd-descrcol" width="100%">A <code>ObjectStoreModuleLifecycleAdapter</code> is a wrapper around <code><a href="../../../../java/org/mule/modules/ObjectStoreModule.html">ObjectStoreModule</a></code> that adds lifecycle methods to the pojo.&nbsp;</td>
+          </tr>
+        <tr class=" api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleMetadataAdapater.html">ObjectStoreModuleMetadataAdapater</a></td>
+              <td class="jd-descrcol" width="100%">A <code>ObjectStoreModuleMetadataAdapater</code> is a wrapper around <code><a href="../../../../java/org/mule/modules/ObjectStoreModule.html">ObjectStoreModule</a></code> that adds support for querying metadata about the extension.&nbsp;</td>
+          </tr>
+        <tr class="alt-color api apilevel-" >
+              <td class="jd-linkcol"><a href="../../../../java/org/mule/modules/adapters/ObjectStoreModuleProcessAdapter.html">ObjectStoreModuleProcessAdapter</a></td>
+              <td class="jd-descrcol" width="100%">A <code>ObjectStoreModuleProcessAdapter</code> is a wrapper around <code><a href="../../../../java/org/mule/modules/ObjectStoreModule.html">ObjectStoreModule</a></code> that enables custom processing strategies.&nbsp;</td>
           </tr>
   </table>
       </div>
@@ -645,10 +661,10 @@ Summary:
             
             
             
-            ObjectStoreManager</nobr>
+            ObjectStore</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#getObjectStoreManager()">getObjectStoreManager</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#getObjectStore()">getObjectStore</a></span>()</nobr>
         
   </td></tr>
 
@@ -661,10 +677,74 @@ Summary:
             
             
             
+            ObjectStoreManager</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#getObjectStoreManager()">getObjectStoreManager</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#getPartition()">getPartition</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Registry</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#getRegistry()">getRegistry</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#init()">init</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#isPersistent()">isPersistent</a></span>()</nobr>
         
   </td></tr>
 
@@ -1303,7 +1383,8 @@ From class
       <table class="jd-tagtable">  
         <tr>
             <th>ObjectStoreException</td>
-            <td></td>
+            <td>if an exception occurred while collecting the list of all keys.
+</td>
         </tr>
       </table>
   </div>
@@ -1382,6 +1463,37 @@ From class
 </div>
 
 
+<A NAME="getObjectStore()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        ObjectStore
+      </span>
+      <span class="sympad">getObjectStore</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
 <A NAME="getObjectStoreManager()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1413,6 +1525,68 @@ From class
 </div>
 
 
+<A NAME="getPartition()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getPartition</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getRegistry()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Registry
+      </span>
+      <span class="sympad">getRegistry</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
 <A NAME="init()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1426,6 +1600,37 @@ From class
         void
       </span>
       <span class="sympad">init</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="isPersistent()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        boolean
+      </span>
+      <span class="sympad">isPersistent</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
