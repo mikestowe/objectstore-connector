@@ -30,7 +30,7 @@
     <objectstore:config partition="test"/>
 
     <flow name="store">
-        <objectstore:store key="mykey" value-ref="#[payload]"/>
+        <objectstore:store key="mykey" value-ref="#[payload]" overwrite="true"/>
     </flow>
 
     <flow name="dualStore">

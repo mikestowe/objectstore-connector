@@ -27,6 +27,7 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
     @Test
     public void testStore() throws Exception
     {
+        runFlowWithPayload("store", "mulesoft2");
         runFlowWithPayload("store", "mulesoft");
 
         ObjectStoreModule module = muleContext.getRegistry().lookupObject(ObjectStoreModule.class);

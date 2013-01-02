@@ -105,7 +105,7 @@ public class ObjectStoreModule {
         } catch (ObjectAlreadyExistsException e) {
             if (overwrite) {
                 objectStore.remove(key);
-                objectStore.store(key, value);
+                store(key, value, true);
             } else {
                 throw e;
             }
