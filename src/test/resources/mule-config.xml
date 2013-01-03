@@ -50,7 +50,11 @@
     </flow>
 
     <flow name="remove">
-        <objectstore:remove key="mykey"/>
+        <objectstore:remove key="mykey" />
+    </flow>
+
+    <flow name="removeNotExists">
+        <objectstore:remove key="mykey" ignoreNotExists="true" />
     </flow>
 
     <flow name="allKeys">

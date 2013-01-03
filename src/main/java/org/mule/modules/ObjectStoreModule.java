@@ -202,15 +202,28 @@ public class ObjectStoreModule {
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:remove}
      *
      * @param key The identifier of the object to remove.
-     * @return The object that was previously stored for the given key
+     * @param ignoreNotExists Indicates if the operation will ignore NotExistsException from ObjectStore.
+     * @return The object that was previously stored for the given key.  If the key does not exist and
+     * ignoreNotExists is true the operation will return a null object.
      * @throws ObjectStoreException if the given key is <code>null</code> or if the store is not
      *                              available or any other implementation-specific error occurred
      * @throws org.mule.api.store.ObjectDoesNotExistException
      *                              if no value for the given key was previously stored.
      */
     @Processor
-    public Object remove(String key) throws ObjectStoreException {
-        return objectStore.remove(key);
+    public Object remove(String key, @Optional @Default("false") boolean ignoreNotExists)
+            throws ObjectStoreException {
+
+        try {
+            return objectStore.remove(key);
+        } catch (ObjectDoesNotExistException e) {
+            if (ignoreNotExists) {
+                return null;
+            }
+            else {
+                throw e;
+            }
+        }
     }
 
     /**
@@ -238,7 +251,7 @@ public class ObjectStoreModule {
             store(key, previousValue, true);
         }
         else {
-            remove(key);
+            remove(key, true);
         }
     }
 

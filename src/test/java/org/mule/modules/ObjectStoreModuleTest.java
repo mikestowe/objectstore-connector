@@ -15,6 +15,7 @@ import org.mule.api.MuleEvent;
 import org.mule.construct.Flow;
 import org.mule.tck.AbstractMuleTestCase;
 import org.mule.tck.FunctionalTestCase;
+import org.mule.transport.NullPayload;
 
 public class ObjectStoreModuleTest extends FunctionalTestCase
 {
@@ -82,7 +83,17 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
     public void testRemove() throws Exception
     {
         runFlowWithPayload("store", "mulesoft");
-        runFlow("remove");
+        Object removedObject = runFlow("remove");
+
+        assertEquals("mulesoft", removedObject);
+    }
+
+    @Test
+    public void testRemoveNotExists() throws Exception
+    {
+        Object removedObject = runFlow("removeNotExists");
+
+        assertTrue(removedObject instanceof NullPayload);
     }
 
     @Test
