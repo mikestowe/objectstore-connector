@@ -312,7 +312,7 @@ in-memory or persistent store will be used.&lt;/xs:documentation&gt;
   &lt;/xs:complexType&gt;
   &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/objectstore&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; name=&quot;dual-store&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; type=&quot;DualStoreType&quot;&gt;
     &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;Store value using key, and also store key using value.
+      &lt;xs:documentation&gt;Store value using key, and also store key using value. If an exception is thrown rolls back both operations.
 &amp;lt;p/&amp;gt;&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
   &lt;/xs:element&gt;
