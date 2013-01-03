@@ -37,6 +37,10 @@
         <objectstore:dual-store key="mykey" value-ref="#[payload]"/>
     </flow>
 
+    <flow name="dualStoreOverwrite">
+        <objectstore:dual-store key="mykey" value-ref="#[payload]" overwrite="true"/>
+    </flow>
+
     <flow name="retrieve">
         <objectstore:retrieve key="mykey"/>
     </flow>

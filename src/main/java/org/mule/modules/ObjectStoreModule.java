@@ -113,7 +113,7 @@ public class ObjectStoreModule {
     }
 
     /**
-     * Store value using key, and also store key using value.
+     * Store value using key, and also store key using value. If an exception is thrown rolls back both operations.
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:dual-store}
      *
@@ -130,17 +130,24 @@ public class ObjectStoreModule {
      *          that already has an object associated. Only thrown if overwrite is false.
      */
     @Processor
-    public void dualStore(String key, Serializable value, @Optional @Default("false") boolean overwrite) throws ObjectStoreException {
+    public void dualStore(String key, Serializable value, @Optional @Default("false") boolean overwrite)
+            throws ObjectStoreException {
+
+        //For rollback purposes
+        Serializable previousValue = null;
+
         try {
             objectStore.store(key, value);
         } catch (ObjectAlreadyExistsException e) {
             if (overwrite) {
+                previousValue = objectStore.retrieve(key);
                 objectStore.remove(key);
-                objectStore.store(key, value);
+                store(key, value, true);
             } else {
                 throw e;
             }
         }
+
         try {
             objectStore.store(value, key);
         } catch (ObjectAlreadyExistsException e) {
@@ -148,10 +155,13 @@ public class ObjectStoreModule {
                 objectStore.remove(value);
                 objectStore.store(value, key);
             } else {
+                rollbackDualStore(key, value, previousValue);
                 throw e;
             }
+        } catch (Exception e) {
+            rollbackDualStore(key, value, previousValue);
+            throw new ObjectStoreException(e);
         }
-
     }
 
     /**
@@ -219,6 +229,16 @@ public class ObjectStoreModule {
             return ((ListableObjectStore<?>) objectStore).allKeys();
         } else {
             throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] does not support the operation allKeys");
+        }
+    }
+
+    private synchronized void rollbackDualStore(String key, Serializable value, Serializable previousValue)
+            throws ObjectStoreException {
+        if (previousValue != null) {
+            store(key, previousValue, true);
+        }
+        else {
+            remove(key);
         }
     }
 

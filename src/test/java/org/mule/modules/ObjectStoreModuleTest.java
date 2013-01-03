@@ -50,6 +50,21 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
     }
 
     @Test
+    public void testDualStoreOverwrite() throws Exception
+    {
+        ObjectStoreModule module = muleContext.getRegistry().lookupObject(ObjectStoreModule.class);
+        module.store("mykey", "myKeyValue", true);
+        module.store("mulesoft", "myKeyValue2", true);
+        runFlowWithPayload("dualStoreOverwrite", "mulesoft");
+
+        String value1 = (String)module.getObjectStoreManager().getObjectStore("test").retrieve("mykey");
+        String value2 = (String)module.getObjectStoreManager().getObjectStore("test").retrieve("mulesoft");
+
+        assertEquals("mulesoft", value1);
+        assertEquals("mykey", value2);
+    }
+
+    @Test
     public void testRetrieve() throws Exception
     {
         runFlowWithPayload("store", "mulesoft");
