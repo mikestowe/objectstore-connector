@@ -27,37 +27,37 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
 
-    <objectstore:config partition="test"/>
+    <objectstore:config partition="test" name="test-partition"/>
 
     <flow name="store">
-        <objectstore:store key="mykey" value-ref="#[payload]" overwrite="true"/>
+        <objectstore:store key="mykey" value-ref="#[payload]" overwrite="true" config-ref="test-partition"/>
     </flow>
 
     <flow name="dualStore">
-        <objectstore:dual-store key="mykey" value-ref="#[payload]"/>
+        <objectstore:dual-store key="mykey" value-ref="#[payload]" config-ref="test-partition"/>
     </flow>
 
     <flow name="dualStoreOverwrite">
-        <objectstore:dual-store key="mykey" value-ref="#[payload]" overwrite="true"/>
+        <objectstore:dual-store key="mykey" value-ref="#[payload]" overwrite="true" config-ref="test-partition"/>
     </flow>
 
     <flow name="retrieve">
-        <objectstore:retrieve key="mykey"/>
+        <objectstore:retrieve key="mykey" config-ref="test-partition"/>
     </flow>
 
     <flow name="retrieveDefaultValue">
-        <objectstore:retrieve key="mykey2" defaultValue-ref="#[string:muleion]"/>
+        <objectstore:retrieve key="mykey2" defaultValue-ref="#[string:muleion]" config-ref="test-partition"/>
     </flow>
 
     <flow name="remove">
-        <objectstore:remove key="mykey" />
+        <objectstore:remove key="mykey" config-ref="test-partition"/>
     </flow>
 
     <flow name="removeNotExists">
-        <objectstore:remove key="mykey" ignoreNotExists="true" />
+        <objectstore:remove key="mykey" ignoreNotExists="true" config-ref="test-partition"/>
     </flow>
 
     <flow name="allKeys">
-        <objectstore:all-keys/>
+        <objectstore:all-keys config-ref="test-partition"/>
     </flow>
 </mule>

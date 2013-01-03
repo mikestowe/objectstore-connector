@@ -13,3 +13,6 @@
 <!-- BEGIN_INCLUDE(objectstore:all-keys) -->
 <objectstore:all-keys/>
 <!-- END_INCLUDE(objectstore:all-keys) -->
+<!-- BEGIN_INCLUDE(objectstore:contains) -->
+<objectstore:contains key="mykey"/>
+<!-- END_INCLUDE(objectstore:contains) -->

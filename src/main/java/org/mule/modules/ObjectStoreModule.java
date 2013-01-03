@@ -21,6 +21,7 @@ import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.api.store.ObjectStoreManager;
+import org.mule.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -47,7 +48,7 @@ public class ObjectStoreModule {
 
     /**
      * Specified whenever the required store needs to be persistent or not (this argument has no
-     * meaning if the object store is passed by ref using objectStore-ref)
+     * meaning if the object store is passed by ref using objectStore-ref or no partition name is defined)
      */
     @Configurable
     @Optional
@@ -71,10 +72,14 @@ public class ObjectStoreModule {
     @PostConstruct
     public void init() {
         if (objectStore == null) {
-            objectStore = registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
-            if (objectStore == null) {
+            if(StringUtils.isNotEmpty(partition)) {
                 objectStore = objectStoreManager.getObjectStore(partition, persistent);
             }
+
+            if(objectStore == null) {
+                objectStore = registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+            }
+
             if (objectStore == null) {
                 throw new IllegalArgumentException("Unable to acquire an object store.");
             }
@@ -243,6 +248,20 @@ public class ObjectStoreModule {
         } else {
             throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] does not support the operation allKeys");
         }
+    }
+
+    /**
+     * Returns whether the object store contains the given key or not
+     *
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:contains}
+     *
+     * @param key The identifier of the object to validate.
+     * @return true if the object store contains the key, or false if it doesn't.
+     * @throws ObjectStoreException if the provided key is null.
+     */
+    @Processor
+    public boolean contains(String key) throws ObjectStoreException {
+        return objectStore.contains(key);
     }
 
     private synchronized void rollbackDualStore(String key, Serializable value, Serializable previousValue)
