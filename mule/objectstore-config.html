@@ -307,6 +307,18 @@ Summary:
 	 
     <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/objectstore-config.html#contains">&lt;objectstore:contains&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Returns whether the object store contains the given key or not
+
+ </div>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore-config.html#dual-store">&lt;objectstore:dual-store&gt;</a></nobr>
         
         <div class="jd-descrdiv">Store value using key, and also store key using value.</div>
@@ -315,7 +327,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore-config.html#remove">&lt;objectstore:remove&gt;</a></nobr>
         
@@ -325,7 +337,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore-config.html#retrieve">&lt;objectstore:retrieve&gt;</a></nobr>
         
@@ -335,7 +347,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/objectstore-config.html#store">&lt;objectstore:store&gt;</a></nobr>
         
@@ -432,7 +444,7 @@ specify which configuration to use.</p>
           <td class="jd-linkcol"><nobr>persistent</nobr></td>
           <td class="jd-descrcol">false</td>
           <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specified whenever the required store needs to be persistent or not (this argument has no
- meaning if the object store is passed by ref using objectStore-ref)
+ meaning if the object store is passed by ref using objectStore-ref or no partition name is defined)
 </td>
           <td class="jd-descrcol"></td>
           <td class="jd-descrcol"></td>
@@ -527,6 +539,87 @@ specify which configuration to use.</p>
         <tr>
             <td>ObjectStoreException</td>
             <td>if an exception occurred while collecting the list of all keys.
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="contains"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;objectstore:contains&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns whether the object store contains the given key or not
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;objectstore:contains key="mykey"/&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>key</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The identifier of the object to validate.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">boolean</td>
+                <td class="jd-descrcol">true if the object store contains the key, or false if it doesn't.</td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td>ObjectStoreException</td>
+            <td>if the provided key is null.
 </td>
         </tr>
       </table>
