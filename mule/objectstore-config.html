@@ -681,6 +681,18 @@ specify which configuration to use.</p>
                 
                 
           
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>ignoreNotExists</nobr></td>
+                        <td class="jd-descrcol">false</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Indicates if the operation will ignore NotExistsException from ObjectStore.</td>
+                        <td class="jd-descrcol">boolean</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
           
           
         </table>
@@ -696,7 +708,8 @@ specify which configuration to use.</p>
              </tr>
              <tr>
                 <td class="jd-descrcol">Object</td>
-                <td class="jd-descrcol">The object that was previously stored for the given key</td>
+                <td class="jd-descrcol">The object that was previously stored for the given key.  If the key does not exist and
+ ignoreNotExists is true the operation will return a null object.</td>
              </tr>
          </table>
   </div>

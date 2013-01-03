@@ -760,7 +760,7 @@ Summary:
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#remove(java.lang.String)">remove</a></span>(String key)</nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#remove(java.lang.String, boolean)">remove</a></span>(String key, boolean ignoreNotExists)</nobr>
         
         <div class="jd-descrdiv">Remove the object with key.</div>
   
@@ -1649,7 +1649,7 @@ From class
 </div>
 
 
-<A NAME="remove(java.lang.String)"></A>
+<A NAME="remove(java.lang.String, boolean)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1662,7 +1662,7 @@ From class
         Object
       </span>
       <span class="sympad">remove</span>
-      <span class="normal">(String key)</span>
+      <span class="normal">(String key, boolean ignoreNotExists)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1684,11 +1684,16 @@ From class
           <th>key</td>
           <td>The identifier of the object to remove.</td>
         </tr>
+        <tr>
+          <th>ignoreNotExists</td>
+          <td>Indicates if the operation will ignore NotExistsException from ObjectStore.</td>
+        </tr>
       </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>The object that was previously stored for the given key</li></ul>
+      <ul class="nolist"><li>The object that was previously stored for the given key.  If the key does not exist and
+ ignoreNotExists is true the operation will return a null object.</li></ul>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Throws</h5>
