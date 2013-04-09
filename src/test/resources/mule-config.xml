@@ -27,7 +27,7 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
 
-    <objectstore:config partition="test" name="test-partition"/>
+    <objectstore:config partition="test" name="test-partition" entryTtl="10000" expirationInterval="5000" maxEntries="1000"/>
 
     <flow name="store">
         <objectstore:store key="mykey" value-ref="#[payload]" overwrite="true" config-ref="test-partition"/>

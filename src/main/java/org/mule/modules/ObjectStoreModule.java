@@ -63,6 +63,27 @@ public class ObjectStoreModule {
     @Optional
     private ObjectStore objectStore;
 
+    /**
+     * TimeToLive for stored values in milliseconds. MaxEntries and ExpirationInterval are mandatory for using this param.
+     */
+    @Configurable
+    @Optional
+    private Integer entryTtl;
+
+    /**
+     * Specifies the max number of entries. EntryTTL and ExpirationInterval are mandatory for using this param.
+     */
+    @Configurable
+    @Optional
+    private Integer maxEntries;
+
+    /**
+     * Specifies the expiration check interval in milliseconds. EntryTTL and MaxEntries are mandatory for using this param.
+     */
+    @Configurable
+    @Optional
+    private Integer expirationInterval;
+
     @Inject
     private Registry registry;
 
@@ -73,7 +94,12 @@ public class ObjectStoreModule {
     public void init() {
         if (objectStore == null) {
             if(StringUtils.isNotEmpty(partition)) {
-                objectStore = objectStoreManager.getObjectStore(partition, persistent);
+                if(entryTtl != null && maxEntries != null && expirationInterval != null) {
+                    objectStore = objectStoreManager.getObjectStore(partition, persistent, maxEntries, entryTtl, expirationInterval);
+                }
+                else {
+                    objectStore = objectStoreManager.getObjectStore(partition, persistent);
+                }
             }
 
             if(objectStore == null) {
@@ -312,5 +338,29 @@ public class ObjectStoreModule {
 
     public Registry getRegistry() {
         return registry;
+    }
+
+    public Integer getEntryTtl() {
+        return entryTtl;
+    }
+
+    public void setEntryTtl(Integer entryTtl) {
+        this.entryTtl = entryTtl;
+    }
+
+    public Integer getMaxEntries() {
+        return maxEntries;
+    }
+
+    public void setMaxEntries(Integer maxEntries) {
+        this.maxEntries = maxEntries;
+    }
+
+    public Integer getExpirationInterval() {
+        return expirationInterval;
+    }
+
+    public void setExpirationInterval(Integer expirationInterval) {
+        this.expirationInterval = expirationInterval;
     }
 }
