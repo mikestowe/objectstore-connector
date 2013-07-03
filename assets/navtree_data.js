@@ -1,5 +1,6 @@
 var NAVTREE_DATA =
 [ [ "org.mule.modules", "org/mule/modules/package-summary.html", [ [ "Classes", null, [ [ "ObjectStoreModule", "org/mule/modules/ObjectStoreModule.html", null, "" ] ]
+, "" ], [ "Enums", null, [ [ "MulePropertyScope", "org/mule/modules/MulePropertyScope.html", null, "" ] ]
 , "" ] ]
 , "" ], [ "org.mule.modules.adapters", "org/mule/modules/adapters/package-summary.html", [ [ "Classes", null, [ [ "ObjectStoreModuleCapabilitiesAdapter", "org/mule/modules/adapters/ObjectStoreModuleCapabilitiesAdapter.html", null, "" ], [ "ObjectStoreModuleInjectionAdapter", "org/mule/modules/adapters/ObjectStoreModuleInjectionAdapter.html", null, "" ], [ "ObjectStoreModuleLifecycleAdapter", "org/mule/modules/adapters/ObjectStoreModuleLifecycleAdapter.html", null, "" ], [ "ObjectStoreModuleMetadataAdapater", "org/mule/modules/adapters/ObjectStoreModuleMetadataAdapater.html", null, "" ], [ "ObjectStoreModuleProcessAdapter", "org/mule/modules/adapters/ObjectStoreModuleProcessAdapter.html", null, "" ] ]
 , "" ] ]
@@ -13,6 +14,8 @@ var NAVTREE_DATA =
 , "" ], [ "org.mule.modules.process", "org/mule/modules/process/package-summary.html", [ [ "Classes", null, [ [ "NestedProcessorChain", "org/mule/modules/process/NestedProcessorChain.html", null, "" ], [ "ProcessCallbackProcessInterceptor", "org/mule/modules/process/ProcessCallbackProcessInterceptor.html", null, "" ] ]
 , "" ] ]
 , "" ], [ "org.mule.modules.processors", "org/mule/modules/processors/package-summary.html", [ [ "Classes", null, [ [ "AbstractExpressionEvaluator", "org/mule/modules/processors/AbstractExpressionEvaluator.html", null, "" ], [ "AbstractListeningMessageProcessor", "org/mule/modules/processors/AbstractListeningMessageProcessor.html", null, "" ], [ "AbstractMessageProcessor", "org/mule/modules/processors/AbstractMessageProcessor.html", null, "" ], [ "AllKeysMessageProcessor", "org/mule/modules/processors/AllKeysMessageProcessor.html", null, "" ], [ "ContainsMessageProcessor", "org/mule/modules/processors/ContainsMessageProcessor.html", null, "" ], [ "DualStoreMessageProcessor", "org/mule/modules/processors/DualStoreMessageProcessor.html", null, "" ], [ "RemoveMessageProcessor", "org/mule/modules/processors/RemoveMessageProcessor.html", null, "" ], [ "RetrieveMessageProcessor", "org/mule/modules/processors/RetrieveMessageProcessor.html", null, "" ], [ "StoreMessageProcessor", "org/mule/modules/processors/StoreMessageProcessor.html", null, "" ] ]
+, "" ] ]
+, "" ], [ "org.mule.modules.transformers", "org/mule/modules/transformers/package-summary.html", [ [ "Classes", null, [ [ "MulePropertyScopeEnumTransformer", "org/mule/modules/transformers/MulePropertyScopeEnumTransformer.html", null, "" ] ]
 , "" ] ]
 , "" ] ]
 

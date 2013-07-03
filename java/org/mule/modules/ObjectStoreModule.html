@@ -216,6 +216,8 @@
   <a href="../../../../java/org/mule/modules/process/package-summary.html">org.mule.modules.process</a></li>
     <li class="api apilevel-">
   <a href="../../../../java/org/mule/modules/processors/package-summary.html">org.mule.modules.processors</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../java/org/mule/modules/transformers/package-summary.html">org.mule.modules.transformers</a></li>
               </ul><br/>
             </div> <!-- end packages -->
           </div> <!-- end resize-packages -->
@@ -230,6 +232,11 @@
     </li>
               
               
+    <li><h2>Enums</h2>
+      <ul>
+          <li class="api apilevel-"><a href="../../../../java/org/mule/modules/MulePropertyScope.html">MulePropertyScope</a></li>
+      </ul>
+    </li>
               
               
             </ul><br/>
@@ -879,7 +886,7 @@ Summary:
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#retrieve(java.lang.String, java.lang.Object)">retrieve</a></span>(String key, Object defaultValue)</nobr>
+        <span class="sympad"><a href="../../../../org/mule/modules/ObjectStoreModule.html#retrieve(java.lang.String, java.lang.Object, java.lang.String, org.mule.modules.MulePropertyScope, org.mule.api.MuleMessage)">retrieve</a></span>(String key, Object defaultValue, String targetProperty, <a href="../../../../java/org/mule/modules/MulePropertyScope.html">MulePropertyScope</a> targetScope, MuleMessage muleMessage)</nobr>
         
         <div class="jd-descrdiv">Retrieve the given Object.</div>
   
@@ -2106,7 +2113,7 @@ From class
 </div>
 
 
-<A NAME="retrieve(java.lang.String, java.lang.Object)"></A>
+<A NAME="retrieve(java.lang.String, java.lang.Object, java.lang.String, org.mule.modules.MulePropertyScope, org.mule.api.MuleMessage)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2119,7 +2126,7 @@ From class
         Object
       </span>
       <span class="sympad">retrieve</span>
-      <span class="normal">(String key, Object defaultValue)</span>
+      <span class="normal">(String key, Object defaultValue, String targetProperty, <a href="../../../../java/org/mule/modules/MulePropertyScope.html">MulePropertyScope</a> targetScope, MuleMessage muleMessage)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2144,6 +2151,18 @@ From class
         <tr>
           <th>defaultValue</td>
           <td>The default value if the key does not exists.</td>
+        </tr>
+        <tr>
+          <th>targetProperty</td>
+          <td>The Mule Message property where the retrieved value will be stored</td>
+        </tr>
+        <tr>
+          <th>targetScope</td>
+          <td>The Mule Message property scope, only used when targetProperty is specified</td>
+        </tr>
+        <tr>
+          <th>muleMessage</td>
+          <td>Injected Mule Message</td>
         </tr>
       </table>
   </div>
