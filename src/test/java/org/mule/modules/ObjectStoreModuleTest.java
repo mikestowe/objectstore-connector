@@ -12,10 +12,12 @@ import java.util.List;
 
 import org.junit.Test;
 import org.mule.api.MuleEvent;
+import org.mule.api.transport.PropertyScope;
 import org.mule.construct.Flow;
 import org.mule.tck.AbstractMuleTestCase;
 import org.mule.tck.FunctionalTestCase;
 import org.mule.transport.NullPayload;
+import org.mule.util.StringUtils;
 
 public class ObjectStoreModuleTest extends FunctionalTestCase
 {
@@ -77,6 +79,17 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
     public void testRetrieveDefaultValue() throws Exception
     {
         assertEquals("muleion", runFlow("retrieveDefaultValue"));
+    }
+
+    @Test
+    public void testRetrieveToInvocationVariable() throws Exception
+    {
+        runFlowWithPayload("store", "mulesoft");
+        Flow flow = lookupFlowConstruct("retrieveVariable");
+        MuleEvent event = AbstractMuleTestCase.getTestEvent(null);
+        MuleEvent responseEvent = flow.process(event);
+
+        assertEquals("mulesoft", responseEvent.getMessage().getProperty("targetProperty", PropertyScope.SESSION));
     }
 
     @Test
@@ -144,5 +157,14 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
     protected Flow lookupFlowConstruct(String name)
     {
         return (Flow) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
+    }
+
+
+
+    @Test
+    public void test() {
+        String newString = "http://github.com/mulesoft/sqs-connector";
+//        string =    StringUtils.removeEnd(string, "/");
+        System.out.println(StringUtils.removeEnd(newString, "/"));
     }
 }

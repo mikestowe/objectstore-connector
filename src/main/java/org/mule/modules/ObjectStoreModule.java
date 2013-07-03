@@ -8,6 +8,7 @@
 
 package org.mule.modules;
 
+import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -21,6 +22,7 @@ import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.api.store.ObjectStoreManager;
+import org.mule.api.transport.PropertyScope;
 import org.mule.util.StringUtils;
 
 import javax.annotation.PostConstruct;
@@ -202,6 +204,9 @@ public class ObjectStoreModule {
      *
      * @param key          The identifier of the object to retrieve.
      * @param defaultValue The default value if the key does not exists.
+     * @param targetProperty The Mule Message property where the retrieved value will be stored
+     * @param targetScope  The Mule Message property scope, only used when targetProperty is specified
+     * @param muleMessage  Injected Mule Message
      * @return The object associated with the given key. If no object for the given key was found
      *         this method throws an {@link org.mule.api.store.ObjectDoesNotExistException}.
      * @throws ObjectStoreException if the given key is <code>null</code>.
@@ -212,7 +217,10 @@ public class ObjectStoreModule {
      *                              if no value for the given key was previously stored.
      */
     @Processor
-    public Object retrieve(String key, @Optional Object defaultValue) throws ObjectStoreException {
+    @Inject
+    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty,
+                           @Optional @Default("INVOCATION") MulePropertyScope targetScope,
+                           MuleMessage muleMessage) throws ObjectStoreException {
         Object ret = null;
         try {
             ret = objectStore.retrieve(key);
@@ -222,6 +230,10 @@ public class ObjectStoreModule {
             } else {
                 throw ose;
             }
+        }
+
+        if (targetProperty != null) {
+            muleMessage.setProperty(targetProperty, ret, PropertyScope.get(targetScope.value()));
         }
 
         return ret;

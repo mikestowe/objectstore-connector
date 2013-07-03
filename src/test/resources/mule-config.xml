@@ -49,6 +49,11 @@
         <objectstore:retrieve key="mykey2" defaultValue-ref="#[string:muleion]" config-ref="test-partition"/>
     </flow>
 
+    <flow name="retrieveVariable">
+        <objectstore:retrieve key="mykey" config-ref="test-partition" targetProperty="targetProperty"
+                              targetScope="SESSION"/>
+    </flow>
+
     <flow name="remove">
         <objectstore:remove key="mykey" config-ref="test-partition"/>
     </flow>
