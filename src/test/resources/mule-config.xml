@@ -27,7 +27,8 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
 
-    <objectstore:config partition="test" name="test-partition" entryTtl="10000" expirationInterval="5000" maxEntries="1000"/>
+    <objectstore:config partition="test" name="test-partition"/>
+    <objectstore:config partition="test-expirable" name="test-partition-expirable" entryTtl="1000" expirationInterval="1100" maxEntries="1000"/>
 
     <flow name="store">
         <objectstore:store key="mykey" value-ref="#[payload]" overwrite="true" config-ref="test-partition"/>
@@ -59,10 +60,18 @@
     </flow>
 
     <flow name="removeNotExists">
-        <objectstore:remove key="mykey" ignoreNotExists="true" config-ref="test-partition"/>
+        <objectstore:remove key="#[payload]" ignoreNotExists="true" config-ref="test-partition"/>
     </flow>
 
     <flow name="allKeys">
         <objectstore:all-keys config-ref="test-partition"/>
+    </flow>
+
+    <flow name="testStoreExpirable">
+        <objectstore:store key="mykey" value-ref="#[payload]" overwrite="true" config-ref="test-partition-expirable"/>
+    </flow>
+
+    <flow name="contains">
+        <objectstore:contains config-ref="test-partition" key="#[payload]"/>
     </flow>
 </mule>
