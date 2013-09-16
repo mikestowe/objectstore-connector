@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.4.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -16,14 +16,13 @@
     <properties>
         <category>Community</category>
         <licensePath>LICENSE.md</licensePath>
-        <mule.version>3.3.0</mule.version>
         <devkit.studio.package.skip>false</devkit.studio.package.skip>
     </properties>
 
 
     <repositories>
         <repository>
-            <id>mulesoft-releases</id>
+            <id>mule-releases</id>
             <name>MuleSoft Releases Repository</name>
             <url>http://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
