@@ -1,8 +1,14 @@
 org.mule.modules
+org.mule.modules.adapter
 org.mule.modules.adapters
 org.mule.modules.agents
+org.mule.modules.basic
+org.mule.modules.callback
 org.mule.modules.config
 org.mule.modules.config.spring
+org.mule.modules.connection
+org.mule.modules.devkit
+org.mule.modules.oauth
 org.mule.modules.process
 org.mule.modules.processors
 org.mule.modules.transformers

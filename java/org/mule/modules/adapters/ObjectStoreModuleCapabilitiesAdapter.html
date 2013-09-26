@@ -204,14 +204,26 @@
                 
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/modules/package-summary.html">org.mule.modules</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/modules/adapter/package-summary.html">org.mule.modules.adapter</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../java/org/mule/modules/adapters/package-summary.html">org.mule.modules.adapters</a></li>
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/modules/agents/package-summary.html">org.mule.modules.agents</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/modules/basic/package-summary.html">org.mule.modules.basic</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/modules/callback/package-summary.html">org.mule.modules.callback</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../java/org/mule/modules/config/package-summary.html">org.mule.modules.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/modules/config/spring/package-summary.html">org.mule.modules.config.spring</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/modules/connection/package-summary.html">org.mule.modules.connection</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/modules/devkit/package-summary.html">org.mule.modules.devkit</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../../java/org/mule/modules/oauth/package-summary.html">org.mule.modules.oauth</a></li>
     <li class="api apilevel-">
   <a href="../../../../../java/org/mule/modules/process/package-summary.html">org.mule.modules.process</a></li>
     <li class="api apilevel-">
@@ -367,7 +379,7 @@ Summary:
   
       implements 
       
-        Capabilities 
+        <a href="../../../../../java/org/mule/modules/basic/Capabilities.html">Capabilities</a> 
       
   
   
@@ -716,7 +728,7 @@ Summary:
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/modules/adapters/ObjectStoreModuleCapabilitiesAdapter.html#isCapableOf(org.mule.api.Capability)">isCapableOf</a></span>(Capability capability)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/adapters/ObjectStoreModuleCapabilitiesAdapter.html#isCapableOf(org.mule.modules.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../java/org/mule/modules/basic/Capability.html">Capability</a> capability)</nobr>
         
         <div class="jd-descrdiv">Returns true if this module implements such capability
  
@@ -1354,19 +1366,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.Capabilities" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.Capabilities-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.basic.Capabilities" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.modules.basic.Capabilities-trigger"
           src="../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  org.mule.api.Capabilities
+  <a href="../../../../../org/mule/modules/basic/Capabilities.html">org.mule.modules.basic.Capabilities</a>
 
-<div id="inherited-methods-org.mule.api.Capabilities">
-  <div id="inherited-methods-org.mule.api.Capabilities-list"
+<div id="inherited-methods-org.mule.modules.basic.Capabilities">
+  <div id="inherited-methods-org.mule.modules.basic.Capabilities-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.api.Capabilities-summary" style="display: none;">
+  <div id="inherited-methods-org.mule.modules.basic.Capabilities-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -1382,8 +1394,11 @@ From interface
             boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">isCapableOf</span>(Capability arg0)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/basic/Capabilities.html#isCapableOf(org.mule.modules.basic.Capability)">isCapableOf</a></span>(<a href="../../../../../java/org/mule/modules/basic/Capability.html">Capability</a> capability)</nobr>
         
+        <div class="jd-descrdiv">Returns true if this module implements such
+ capability</div>
+  
   </td></tr>
 
 
@@ -1473,7 +1488,7 @@ From interface
 
 
 
-<A NAME="isCapableOf(org.mule.api.Capability)"></A>
+<A NAME="isCapableOf(org.mule.modules.basic.Capability)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1486,7 +1501,7 @@ From interface
         boolean
       </span>
       <span class="sympad">isCapableOf</span>
-      <span class="normal">(Capability capability)</span>
+      <span class="normal">(<a href="../../../../../java/org/mule/modules/basic/Capability.html">Capability</a> capability)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1506,9 +1521,14 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>capability</td>
-          <td></td>
+          <td>The capability to test for</td>
         </tr>
       </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>True if it does, false otherwise
+</li></ul>
   </div>
 
     </div>
