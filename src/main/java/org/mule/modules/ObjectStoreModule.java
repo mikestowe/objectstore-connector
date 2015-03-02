@@ -222,6 +222,42 @@ public class ObjectStoreModule {
     }
 
     /**
+     * Retrieve the given Object with lock.
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve-with-lock}
+     *
+     * @param key          The identifier of the object to retrieve.
+     * @param defaultValue The default value if the key does not exists.
+     * @param targetProperty The Mule Message property where the retrieved value will be stored
+     * @param targetScope  The Mule Message property scope, only used when targetProperty is specified
+     * @param muleMessage  Injected Mule Message
+     * @return The object associated with the given key. If no object for the given key was found
+     *         this method throws an {@link org.mule.api.store.ObjectDoesNotExistException}.
+     * @throws ObjectStoreException if the given key is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
+     *                              if the store is not  available or any other
+     *                              implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectDoesNotExistException
+     *                              if no value for the given key was previously stored.
+     */
+    @Processor
+    @Inject
+    public Object retrieveWithLock(String key, @Optional Object defaultValue, @Optional String targetProperty,
+                           @Optional @Default("INVOCATION") MulePropertyScope targetScope,
+                           MuleMessage muleMessage) throws ObjectStoreException {
+
+        Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
+        lock.lock();
+
+        try {
+            return retrieve(key, defaultValue, targetProperty, targetScope, muleMessage);
+        } finally {
+            lock.unlock();
+        }
+
+    }
+
+    /**
      * Retrieve the given Object.
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve}
@@ -250,7 +286,7 @@ public class ObjectStoreModule {
             ret = objectStore.retrieve(key);
         } catch (ObjectDoesNotExistException ose) {
             if (defaultValue != null) {
-                return defaultValue;
+                ret = defaultValue;
             } else {
                 throw ose;
             }

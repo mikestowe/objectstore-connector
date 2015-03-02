@@ -46,6 +46,10 @@
         <objectstore:retrieve key="mykey" config-ref="test-partition"/>
     </flow>
 
+    <flow name="retrieve-with-lock">
+        <objectstore:retrieve-with-lock key="mykey" config-ref="test-partition"/>
+    </flow>
+
     <flow name="retrieveDefaultValue">
         <objectstore:retrieve key="mykey2" defaultValue-ref="#[string:muleion]" config-ref="test-partition"/>
     </flow>

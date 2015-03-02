@@ -7,6 +7,9 @@
 <!-- BEGIN_INCLUDE(objectstore:retrieve) -->
 <objectstore:retrieve key="mykey" defaultValue-ref="myvalue"/>
 <!-- END_INCLUDE(objectstore:retrieve) -->
+<!-- BEGIN_INCLUDE(objectstore:retrieve-with-lock) -->
+<objectstore:retrieve-with-lock key="mykey" defaultValue-ref="myvalue"/>
+<!-- END_INCLUDE(objectstore:retrieve-with-lock) -->
 <!-- BEGIN_INCLUDE(objectstore:remove) -->
 <objectstore:remove key="mykey"/>
 <!-- END_INCLUDE(objectstore:remove) -->

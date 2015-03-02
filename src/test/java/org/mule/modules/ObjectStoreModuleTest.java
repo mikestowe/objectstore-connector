@@ -51,7 +51,6 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
 
         ObjectStoreModule module = muleContext.getRegistry().lookupObject(OBJECTSTORE_CONFIG_NAME);
         String value = (String)module.getObjectStoreManager().getObjectStore(OBJECTSTORE_PARTITION).retrieve(OBJECTSTORE_KEY);
-
         assertEquals(OBJECTSTORE_VALUE, value);
     }
 
@@ -81,6 +80,14 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
 
         assertEquals(OBJECTSTORE_VALUE, value1);
         assertEquals(OBJECTSTORE_KEY, value2);
+    }
+
+    @Test
+    public void testRetrieveWithLock() throws Exception
+    {
+        runFlowWithPayload("store", OBJECTSTORE_VALUE);
+
+        assertEquals(OBJECTSTORE_VALUE, runFlow("retrieve-with-lock"));
     }
 
     @Test
