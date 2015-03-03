@@ -91,6 +91,14 @@ public class ObjectStoreModuleTest extends FunctionalTestCase
     }
 
     @Test
+    public void testRetrieveStore() throws Exception
+    {
+        runFlowWithPayload("store", OBJECTSTORE_VALUE);
+
+        assertEquals(OBJECTSTORE_VALUE, runFlow("retrieve-store"));
+    }
+
+    @Test
     public void testRetrieve() throws Exception
     {
         runFlowWithPayload("store", OBJECTSTORE_VALUE);

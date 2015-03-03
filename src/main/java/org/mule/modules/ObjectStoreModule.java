@@ -258,6 +258,49 @@ public class ObjectStoreModule {
     }
 
     /**
+     * Retrieve and Store in the same operation.
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve-store}
+     *
+     * @param key          The identifier of the object to retrieve.
+     * @param defaultValue The default value if the key does not exists.
+     * @param storeValue   The object to store. If you want this to be the payload then use value-ref="#[payload]".
+     * @param targetProperty The Mule Message property where the retrieved value will be stored
+     * @param targetScope  The Mule Message property scope, only used when targetProperty is specified
+     * @param muleMessage  Injected Mule Message
+     * @return The object associated with the given key. If no object for the given key was found
+     *         this method returns the defaultValue
+     * @throws ObjectStoreException if the given key is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
+     *                              if the store is not  available or any other
+     *                              implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectDoesNotExistException
+     *                              if no value for the given key was previously stored.
+     */
+    @Processor
+    @Inject
+    public Object retrieveStore(String key, Object defaultValue, Serializable storeValue, @Optional String targetProperty,
+                           @Optional @Default("INVOCATION") MulePropertyScope targetScope,
+                           MuleMessage muleMessage) throws ObjectStoreException {
+
+        Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
+        lock.lock();
+        Object ret = null;
+
+        try {
+            ret = retrieve(key, defaultValue, targetProperty, targetScope, muleMessage);
+            objectStore.store(key, storeValue);
+        } catch (ObjectAlreadyExistsException e) {
+            objectStore.remove(key);
+            objectStore.store(key, storeValue);
+        } finally {
+            lock.unlock();
+        }
+
+        return ret;
+    }
+
+    /**
      * Retrieve the given Object.
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve}
