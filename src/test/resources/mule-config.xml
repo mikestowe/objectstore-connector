@@ -51,7 +51,7 @@
     </flow>
 
     <flow name="retrieve-store">
-        <objectstore:retrieve-store key="mykey" defaultValue-ref="#[false]" storeValue-ref="#[true]" config-ref="test-partition"/>
+        <objectstore:retrieve-store key="mykey" defaultValue-ref="#[true]" storeValue-ref="#[false]" config-ref="test-partition"/>
     </flow>
 
     <flow name="retrieveDefaultValue">

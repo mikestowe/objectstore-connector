@@ -287,8 +287,8 @@ public class ObjectStoreModule {
         lock.lock();
         Object ret = null;
 
+        ret = retrieve(key, defaultValue, targetProperty, targetScope, muleMessage);
         try {
-            ret = retrieve(key, defaultValue, targetProperty, targetScope, muleMessage);
             objectStore.store(key, storeValue);
         } catch (ObjectAlreadyExistsException e) {
             objectStore.remove(key);
