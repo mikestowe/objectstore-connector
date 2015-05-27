@@ -99,9 +99,9 @@ public class ObjectStoreModule {
 
     @Inject
     private MuleContext muleContext = null;
-    
+
     private String sharedObjectStoreLockId = null;
-    
+
     @PostConstruct
     public void init() {
         if (objectStore == null) {
@@ -122,7 +122,7 @@ public class ObjectStoreModule {
                 throw new IllegalArgumentException("Unable to acquire an object store.");
             }
         }
-        
+
         if (sharedObjectStoreLockId == null) {
             sharedObjectStoreLockId = new Random().nextInt(1000) + "-" + System.currentTimeMillis() + "-lock";
         }
@@ -181,7 +181,6 @@ public class ObjectStoreModule {
      *          that already has an object associated. Only thrown if overwrite is false.
      */
     @Processor
-    @Inject
     public void dualStore(String key, Serializable value, @Optional @Default("false") boolean overwrite)
             throws ObjectStoreException {
 
@@ -201,7 +200,7 @@ public class ObjectStoreModule {
                     throw e;
                 }
             }
-    
+
             try {
                 objectStore.store(value, key);
             } catch (ObjectAlreadyExistsException e) {
@@ -241,7 +240,6 @@ public class ObjectStoreModule {
      *                              if no value for the given key was previously stored.
      */
     @Processor
-    @Inject
     public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty,
                            @Optional @Default("INVOCATION") MulePropertyScope targetScope,
                            MuleMessage muleMessage) throws ObjectStoreException {
@@ -278,7 +276,6 @@ public class ObjectStoreModule {
      *                              if no value for the given key was previously stored.
      */
     @Processor
-    @Inject
     public Object remove(String key, @Optional @Default("false") boolean ignoreNotExists)
             throws ObjectStoreException {
         Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
@@ -341,15 +338,15 @@ public class ObjectStoreModule {
 
     /*
      * This method is executed inside a lock
-     */    
+     */
     private void silentlyDelete(String key) {
         try {
             objectStore.remove(key);
         } catch(Exception ex) {
-            
-        }        
+
+        }
     }
-    
+
     public ObjectStoreManager getObjectStoreManager() {
         return objectStoreManager;
     }
