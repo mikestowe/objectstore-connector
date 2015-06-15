@@ -1,18 +1,18 @@
 <!-- BEGIN_INCLUDE(objectstore:store) -->
-<objectstore:store key="mykey" value-ref="#[payload]"/>
+<objectstore:store key="mykey" value-ref="#[payload]" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:store) -->
 <!-- BEGIN_INCLUDE(objectstore:dual-store) -->
-<objectstore:dual-store key="mykey" value-ref="#[payload]"/>
+<objectstore:dual-store key="mykey" value-ref="#[payload]" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:dual-store) -->
 <!-- BEGIN_INCLUDE(objectstore:retrieve) -->
-<objectstore:retrieve key="mykey" defaultValue-ref="myvalue"/>
+<objectstore:retrieve key="mykey" defaultValue-ref="myvalue" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:retrieve) -->
 <!-- BEGIN_INCLUDE(objectstore:remove) -->
-<objectstore:remove key="mykey"/>
+<objectstore:remove key="mykey" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:remove) -->
 <!-- BEGIN_INCLUDE(objectstore:all-keys) -->
-<objectstore:all-keys/>
+<objectstore:all-keys config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:all-keys) -->
 <!-- BEGIN_INCLUDE(objectstore:contains) -->
-<objectstore:contains key="mykey"/>
+<objectstore:contains key="mykey" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:contains) -->
