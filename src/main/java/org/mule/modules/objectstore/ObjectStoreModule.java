@@ -8,6 +8,7 @@ package org.mule.modules.objectstore;
 
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
+import org.mule.api.annotations.Category;
 import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -34,6 +35,7 @@ import java.util.concurrent.locks.Lock;
  * @author MuleSoft, Inc.
  */
 @Module(name = "objectstore", schemaVersion = "1.0", friendlyName = "ObjectStore")
+@Category(name = "org.mule.tooling.category.transformers", description = "Transformers")
 public class ObjectStoreModule {
 
     @Config
