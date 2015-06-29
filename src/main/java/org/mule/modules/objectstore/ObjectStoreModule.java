@@ -23,6 +23,7 @@ import org.mule.util.StringUtils;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
@@ -200,8 +201,8 @@ public class ObjectStoreModule {
      *             if no value for the given key was previously stored.
      */
     @Processor
-    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope, MuleMessage muleMessage)
-            throws ObjectStoreException {
+    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope,
+            MuleMessage muleMessage) throws ObjectStoreException {
         Object ret = null;
         try {
             ret = objectStore.retrieve(key);
@@ -264,11 +265,23 @@ public class ObjectStoreModule {
      *             if an exception occurred while collecting the list of all keys.
      */
     @Processor
-    public List<Serializable> allKeys() throws ObjectStoreException {
+    public List<String> allKeys() throws ObjectStoreException {
         if (objectStore instanceof ListableObjectStore) {
-            return ((ListableObjectStore<?>) objectStore).allKeys();
+            List<Serializable> allkeys = ((ListableObjectStore<?>) objectStore).allKeys();
+            List<String> list = new ArrayList<String>();
+            for(Serializable key: allkeys){
+                if(key instanceof String) {
+                    list.add((String) key);
+                }
+                else{
+                    throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() +
+                            "] supports only keys of type: " + String.class.getName());
+                }
+            }
+            return list;
         } else {
-            throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] does not support the operation allKeys");
+            throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() +
+                    "] does not support the operation allKeys");
         }
     }
 
