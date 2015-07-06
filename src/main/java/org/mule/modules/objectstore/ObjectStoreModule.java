@@ -10,7 +10,7 @@ import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Category;
 import org.mule.api.annotations.Config;
-import org.mule.api.annotations.Module;
+import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
@@ -35,12 +35,12 @@ import java.util.concurrent.locks.Lock;
  *
  * @author MuleSoft, Inc.
  */
-@Module(name = "objectstore", schemaVersion = "1.0", friendlyName = "ObjectStore")
+@Connector(name = "objectstore", schemaVersion = "1.0", friendlyName = "ObjectStore", description = "ObjectStore Module")
 @Category(name = "org.mule.tooling.category.transformers", description = "Transformers")
 public class ObjectStoreModule {
 
     @Config
-    private ObjectStoreConfiguration configuration;
+    private ObjectStoreConfiguration config;
 
     @Inject
     private Registry registry;
@@ -52,29 +52,26 @@ public class ObjectStoreModule {
     private MuleContext muleContext = null;
 
     private String sharedObjectStoreLockId = null;
-    private String partition;
-    private boolean persistent;
-    private ObjectStore<Serializable> objectStore;
-    private Integer entryTtl;
-    private Integer maxEntries;
-    private Integer expirationInterval;
 
     @PostConstruct
     public void init() {
-        if (objectStore == null) {
-            if (StringUtils.isNotEmpty(partition)) {
-                if (entryTtl != null && maxEntries != null && expirationInterval != null) {
-                    objectStore = objectStoreManager.getObjectStore(partition, persistent, maxEntries, entryTtl, expirationInterval);
+        if (config.getObjectStore() == null) {
+            if (StringUtils.isNotEmpty(config.getPartition())) {
+                if (config.getEntryTtl() != null && config.getMaxEntries() != null && config.getExpirationInterval() != null) {
+                    ObjectStore<Serializable> objectStore = objectStoreManager.getObjectStore(config.getPartition(), config.getPersistent(), config.getMaxEntries(),
+                            config.getEntryTtl(), config.getExpirationInterval());
+                    config.setObjectStore(objectStore);
                 } else {
-                    objectStore = objectStoreManager.getObjectStore(partition, persistent);
+                    ObjectStore<Serializable> objectStore = objectStoreManager.getObjectStore(config.getPartition(), config.getPersistent());
+                    config.setObjectStore(objectStore);
                 }
             }
 
-            if (objectStore == null) {
-                objectStore = registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+            if (config.getObjectStore() == null) {
+                config.setObjectStore((ObjectStore) registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME));
             }
 
-            if (objectStore == null) {
+            if (config.getObjectStore() == null) {
                 throw new IllegalArgumentException("Unable to acquire an object store.");
             }
         }
@@ -107,11 +104,11 @@ public class ObjectStoreModule {
         Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
         lock.lock();
         try {
-            objectStore.store(key, value);
+            config.getObjectStore().store(key, value);
         } catch (ObjectAlreadyExistsException e) {
             if (overwrite) {
-                objectStore.remove(key);
-                objectStore.store(key, value);
+                config.getObjectStore().remove(key);
+                config.getObjectStore().store(key, value);
             } else {
                 throw e;
             }
@@ -147,23 +144,23 @@ public class ObjectStoreModule {
         lock.lock();
         try {
             try {
-                objectStore.store(key, value);
+                config.getObjectStore().store(key, value);
             } catch (ObjectAlreadyExistsException e) {
                 if (overwrite) {
-                    previousValue = objectStore.retrieve(key);
-                    objectStore.remove(key);
-                    objectStore.store(key, value);
+                    previousValue = config.getObjectStore().retrieve(key);
+                    config.getObjectStore().remove(key);
+                    config.getObjectStore().store(key, value);
                 } else {
                     throw e;
                 }
             }
 
             try {
-                objectStore.store(value, key);
+                config.getObjectStore().store(value, key);
             } catch (ObjectAlreadyExistsException e) {
                 if (overwrite) {
-                    objectStore.remove(value);
-                    objectStore.store(value, key);
+                    config.getObjectStore().remove(value);
+                    config.getObjectStore().store(value, key);
                 } else {
                     rollbackDualStore(key, value, previousValue);
                     throw e;
@@ -201,11 +198,11 @@ public class ObjectStoreModule {
      *             if no value for the given key was previously stored.
      */
     @Processor
-    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope,
-            MuleMessage muleMessage) throws ObjectStoreException {
+    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope, MuleMessage muleMessage)
+            throws ObjectStoreException {
         Object ret = null;
         try {
-            ret = objectStore.retrieve(key);
+            ret = config.getObjectStore().retrieve(key);
         } catch (ObjectDoesNotExistException ose) {
             if (defaultValue != null) {
                 return defaultValue;
@@ -241,7 +238,7 @@ public class ObjectStoreModule {
         Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
         lock.lock();
         try {
-            return objectStore.remove(key);
+            return config.getObjectStore().remove(key);
         } catch (ObjectDoesNotExistException e) {
             if (ignoreNotExists) {
                 return null;
@@ -266,22 +263,20 @@ public class ObjectStoreModule {
      */
     @Processor
     public List<String> allKeys() throws ObjectStoreException {
-        if (objectStore instanceof ListableObjectStore) {
-            List<Serializable> allkeys = ((ListableObjectStore<?>) objectStore).allKeys();
+        if (config.getObjectStore() instanceof ListableObjectStore) {
+            List<Serializable> allkeys = ((ListableObjectStore<?>) config.getObjectStore()).allKeys();
             List<String> list = new ArrayList<String>();
-            for(Serializable key: allkeys){
-                if(key instanceof String) {
+            for (Serializable key : allkeys) {
+                if (key instanceof String) {
                     list.add((String) key);
-                }
-                else{
-                    throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() +
-                            "] supports only keys of type: " + String.class.getName());
+                } else {
+                    throw new UnsupportedOperationException("The objectStore [" + config.getObjectStore().getClass().getName() + "] supports only keys of type: "
+                            + String.class.getName());
                 }
             }
             return list;
         } else {
-            throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() +
-                    "] does not support the operation allKeys");
+            throw new UnsupportedOperationException("The objectStore [" + config.getObjectStore().getClass().getName() + "] does not support the operation allKeys");
         }
     }
 
@@ -298,7 +293,7 @@ public class ObjectStoreModule {
      */
     @Processor
     public boolean contains(String key) throws ObjectStoreException {
-        return objectStore.contains(key);
+        return config.getObjectStore().contains(key);
     }
 
     /*
@@ -307,7 +302,7 @@ public class ObjectStoreModule {
     private void rollbackDualStore(String key, Serializable value, Serializable previousValue) throws ObjectStoreException {
         silentlyDelete(key);
         if (previousValue != null) {
-            objectStore.store(key, previousValue);
+            config.getObjectStore().store(key, previousValue);
         }
     }
 
@@ -316,10 +311,18 @@ public class ObjectStoreModule {
      */
     private void silentlyDelete(String key) {
         try {
-            objectStore.remove(key);
+            config.getObjectStore().remove(key);
         } catch (Exception ex) {
 
         }
+    }
+
+    public ObjectStoreConfiguration getConfig() {
+        return config;
+    }
+
+    public void setConfig(ObjectStoreConfiguration config) {
+        this.config = config;
     }
 
     public ObjectStoreManager getObjectStoreManager() {
@@ -340,19 +343,5 @@ public class ObjectStoreModule {
 
     public void setMuleContext(MuleContext context) {
         this.muleContext = context;
-    }
-
-    public ObjectStoreConfiguration getConfiguration() {
-        return configuration;
-    }
-
-    public void setConfiguration(ObjectStoreConfiguration configuration) {
-        this.configuration = configuration;
-        this.partition = configuration.getPartition();
-        this.persistent = configuration.getPersistent();
-        this.objectStore = configuration.getObjectStore();
-        this.entryTtl = configuration.getEntryTtl();
-        this.maxEntries = configuration.getMaxEntries();
-        this.expirationInterval = configuration.getExpirationInterval();
     }
 }

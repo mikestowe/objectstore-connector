@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.7.0-RC3</version>
+        <version>3.7.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -17,8 +17,24 @@
         <category>Community</category>
         <licensePath>LICENSE.md</licensePath>
         <devkit.studio.package.skip>false</devkit.studio.package.skip>
+        <connector.testing.framework.version>0.9.2-SNAPSHOT</connector.testing.framework.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.mule.tools.devkit</groupId>
+            <artifactId>connector-testing-framework</artifactId>
+            <version>${connector.testing.framework.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Connector Testing Framework required project -->
+        <dependency>
+            <groupId>org.mule.tools.devkit</groupId>
+            <artifactId>connector-testing-framework-serializers</artifactId>
+            <version>${connector.testing.framework.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <repositories>
         <repository>
