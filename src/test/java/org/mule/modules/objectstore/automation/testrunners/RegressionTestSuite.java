@@ -18,12 +18,7 @@ import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
 @RunWith(Categories.class)
 @Categories.IncludeCategory(RegressionTests.class)
 @SuiteClasses({
-        StoreTestCases.class,
-        DualStoreTestCases.class,
-        RetrieveTestCases.class,
-        RemoveTestCases.class,
-        AllKeysTestCases.class,
-        ContainsTestCases.class })
+        StoreTestCases.class, DualStoreTestCases.class, RetrieveTestCases.class, RemoveTestCases.class, AllKeysTestCases.class, ContainsTestCases.class })
 public class RegressionTestSuite {
 
     @BeforeClass

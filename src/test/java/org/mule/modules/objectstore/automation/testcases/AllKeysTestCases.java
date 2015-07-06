@@ -5,17 +5,17 @@
  */
 package org.mule.modules.objectstore.automation.testcases;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mule.modules.objectstore.ObjectStoreModule;
 import org.mule.modules.objectstore.automation.ObjectStoreTestParent;
 import org.mule.modules.objectstore.automation.RegressionTests;
+
+import java.util.List;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 public class AllKeysTestCases extends ObjectStoreTestParent {
 

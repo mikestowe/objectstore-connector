@@ -58,8 +58,8 @@ public class ObjectStoreModule {
         if (config.getObjectStore() == null) {
             if (StringUtils.isNotEmpty(config.getPartition())) {
                 if (config.getEntryTtl() != null && config.getMaxEntries() != null && config.getExpirationInterval() != null) {
-                    ObjectStore<Serializable> objectStore = objectStoreManager.getObjectStore(config.getPartition(), config.getPersistent(), config.getMaxEntries(),
-                            config.getEntryTtl(), config.getExpirationInterval());
+                    ObjectStore<Serializable> objectStore = objectStoreManager
+                            .getObjectStore(config.getPartition(), config.getPersistent(), config.getMaxEntries(), config.getEntryTtl(), config.getExpirationInterval());
                     config.setObjectStore(objectStore);
                 } else {
                     ObjectStore<Serializable> objectStore = objectStoreManager.getObjectStore(config.getPartition(), config.getPersistent());
@@ -86,18 +86,12 @@ public class ObjectStoreModule {
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:store}
      *
-     * @param key
-     *            The identifier of the object to store
-     * @param value
-     *            The object to store. If you want this to be the payload then use value-ref="#[payload]".
-     * @param overwrite
-     *            True if you want to overwrite the existing object.
-     * @throws org.mule.api.store.ObjectStoreException
-     *             if the given key cannot be stored or is <code>null</code>.
-     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
-     *             if the store is not available or any other implementation-specific error occured.
-     * @throws org.mule.api.store.ObjectAlreadyExistsException
-     *             if an attempt is made to store an object for a key that already has an object associated. Only thrown if overwrite is false.
+     * @param key       The identifier of the object to store
+     * @param value     The object to store. If you want this to be the payload then use value-ref="#[payload]".
+     * @param overwrite True if you want to overwrite the existing object.
+     * @throws org.mule.api.store.ObjectStoreException             if the given key cannot be stored or is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException if the store is not available or any other implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectAlreadyExistsException     if an attempt is made to store an object for a key that already has an object associated. Only thrown if overwrite is false.
      */
     @Processor
     public void store(String key, Serializable value, @Default("false") boolean overwrite) throws ObjectStoreException {
@@ -122,18 +116,12 @@ public class ObjectStoreModule {
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:dual-store}
      *
-     * @param key
-     *            The identifier of the object to store
-     * @param value
-     *            The object to store. If you want this to be the payload then use value-ref="#[payload]".
-     * @param overwrite
-     *            True if you want to overwrite the existing object.
-     * @throws org.mule.api.store.ObjectStoreException
-     *             if the given key cannot be stored or is <code>null</code>.
-     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
-     *             if the store is not available or any other implementation-specific error occured.
-     * @throws org.mule.api.store.ObjectAlreadyExistsException
-     *             if an attempt is made to store an object for a key that already has an object associated. Only thrown if overwrite is false.
+     * @param key       The identifier of the object to store
+     * @param value     The object to store. If you want this to be the payload then use value-ref="#[payload]".
+     * @param overwrite True if you want to overwrite the existing object.
+     * @throws org.mule.api.store.ObjectStoreException             if the given key cannot be stored or is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException if the store is not available or any other implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectAlreadyExistsException     if an attempt is made to store an object for a key that already has an object associated. Only thrown if overwrite is false.
      */
     @Processor
     public void dualStore(String key, Serializable value, @Default("false") boolean overwrite) throws ObjectStoreException {
@@ -179,27 +167,19 @@ public class ObjectStoreModule {
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve}
      *
-     * @param key
-     *            The identifier of the object to retrieve.
-     * @param defaultValue
-     *            The default value if the key does not exists.
-     * @param targetProperty
-     *            The Mule Message property where the retrieved value will be stored
-     * @param targetScope
-     *            The Mule Message property scope, only used when targetProperty is specified
-     * @param muleMessage
-     *            Injected Mule Message
+     * @param key            The identifier of the object to retrieve.
+     * @param defaultValue   The default value if the key does not exists.
+     * @param targetProperty The Mule Message property where the retrieved value will be stored
+     * @param targetScope    The Mule Message property scope, only used when targetProperty is specified
+     * @param muleMessage    Injected Mule Message
      * @return The object associated with the given key. If no object for the given key was found this method throws an {@link org.mule.api.store.ObjectDoesNotExistException}.
-     * @throws ObjectStoreException
-     *             if the given key is <code>null</code>.
-     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
-     *             if the store is not available or any other implementation-specific error occured.
-     * @throws org.mule.api.store.ObjectDoesNotExistException
-     *             if no value for the given key was previously stored.
+     * @throws ObjectStoreException                                if the given key is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException if the store is not available or any other implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectDoesNotExistException      if no value for the given key was previously stored.
      */
     @Processor
-    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope, MuleMessage muleMessage)
-            throws ObjectStoreException {
+    public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope,
+            MuleMessage muleMessage) throws ObjectStoreException {
         Object ret = null;
         try {
             ret = config.getObjectStore().retrieve(key);
@@ -223,15 +203,11 @@ public class ObjectStoreModule {
      * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:remove}
      *
-     * @param key
-     *            The identifier of the object to remove.
-     * @param ignoreNotExists
-     *            Indicates if the operation will ignore NotExistsException from ObjectStore.
+     * @param key             The identifier of the object to remove.
+     * @param ignoreNotExists Indicates if the operation will ignore NotExistsException from ObjectStore.
      * @return The object that was previously stored for the given key. If the key does not exist and ignoreNotExists is true the operation will return a null object.
-     * @throws ObjectStoreException
-     *             if the given key is <code>null</code> or if the store is not available or any other implementation-specific error occurred
-     * @throws org.mule.api.store.ObjectDoesNotExistException
-     *             if no value for the given key was previously stored.
+     * @throws ObjectStoreException                           if the given key is <code>null</code> or if the store is not available or any other implementation-specific error occurred
+     * @throws org.mule.api.store.ObjectDoesNotExistException if no value for the given key was previously stored.
      */
     @Processor
     public Object remove(String key, @Default("false") boolean ignoreNotExists) throws ObjectStoreException {
@@ -258,8 +234,7 @@ public class ObjectStoreModule {
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:all-keys}
      *
      * @return a java.util.List with all the keys in the store.
-     * @throws ObjectStoreException
-     *             if an exception occurred while collecting the list of all keys.
+     * @throws ObjectStoreException if an exception occurred while collecting the list of all keys.
      */
     @Processor
     public List<String> allKeys() throws ObjectStoreException {
@@ -270,8 +245,8 @@ public class ObjectStoreModule {
                 if (key instanceof String) {
                     list.add((String) key);
                 } else {
-                    throw new UnsupportedOperationException("The objectStore [" + config.getObjectStore().getClass().getName() + "] supports only keys of type: "
-                            + String.class.getName());
+                    throw new UnsupportedOperationException(
+                            "The objectStore [" + config.getObjectStore().getClass().getName() + "] supports only keys of type: " + String.class.getName());
                 }
             }
             return list;
@@ -282,14 +257,12 @@ public class ObjectStoreModule {
 
     /**
      * Returns whether the object store contains the given key or not
-     *
+     * <p/>
      * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:contains}
      *
-     * @param key
-     *            The identifier of the object to validate.
+     * @param key The identifier of the object to validate.
      * @return true if the object store contains the key, or false if it doesn't.
-     * @throws ObjectStoreException
-     *             if the provided key is null.
+     * @throws ObjectStoreException if the provided key is null.
      */
     @Processor
     public boolean contains(String key) throws ObjectStoreException {
@@ -309,12 +282,8 @@ public class ObjectStoreModule {
     /*
      * This method is executed inside a lock
      */
-    private void silentlyDelete(String key) {
-        try {
-            config.getObjectStore().remove(key);
-        } catch (Exception ex) {
-
-        }
+    private void silentlyDelete(String key) throws ObjectStoreException {
+        config.getObjectStore().remove(key);
     }
 
     public ObjectStoreConfiguration getConfig() {
@@ -333,12 +302,12 @@ public class ObjectStoreModule {
         this.objectStoreManager = objectStoreManager;
     }
 
-    public void setRegistry(Registry registry) {
-        this.registry = registry;
-    }
-
     public Registry getRegistry() {
         return registry;
+    }
+
+    public void setRegistry(Registry registry) {
+        this.registry = registry;
     }
 
     public void setMuleContext(MuleContext context) {

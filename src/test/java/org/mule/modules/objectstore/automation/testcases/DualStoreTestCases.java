@@ -5,8 +5,6 @@
  */
 package org.mule.modules.objectstore.automation.testcases;
 
-import static junit.framework.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -16,12 +14,13 @@ import org.mule.modules.objectstore.ObjectStoreModule;
 import org.mule.modules.objectstore.automation.ObjectStoreTestParent;
 import org.mule.modules.objectstore.automation.RegressionTests;
 
+import static junit.framework.Assert.assertEquals;
+
 public class DualStoreTestCases extends ObjectStoreTestParent {
 
     @Category({ RegressionTests.class })
     @Test
     public void testDualStore() throws Exception {
-
         ObjectStoreModule module = getModule();
         module.dualStore(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);
         String value = (String) module.retrieve(OBJECTSTORE_KEY, null, null, MulePropertyScope.INVOCATION, null);
@@ -34,7 +33,6 @@ public class DualStoreTestCases extends ObjectStoreTestParent {
     @Category({ RegressionTests.class })
     @Test
     public void testDualStoreOverwrite() throws Exception {
-
         ObjectStoreModule module = getModule();
         module.store(OBJECTSTORE_KEY, "myKeyValue", true);
         module.store(OBJECTSTORE_VALUE, "myKeyValue2", true);
@@ -48,8 +46,16 @@ public class DualStoreTestCases extends ObjectStoreTestParent {
 
     @Category({ RegressionTests.class })
     @Test(expected = ObjectStoreException.class)
-    public void testDualStoreFailOnOverwrite() throws Exception {
+    public void testDualStoreRollBack() throws Exception {
+        ObjectStoreModule module = getModule();
+        module.dualStore(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);
+        module.remove(OBJECTSTORE_KEY, true);
+        module.dualStore(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);
+    }
 
+    @Category({ RegressionTests.class })
+    @Test(expected = ObjectStoreException.class)
+    public void testDualStoreFailOnOverwrite() throws Exception {
         ObjectStoreModule module = getModule();
         module.dualStore(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);
         module.dualStore(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);

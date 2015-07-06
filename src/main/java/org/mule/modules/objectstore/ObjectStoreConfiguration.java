@@ -6,15 +6,13 @@
 
 package org.mule.modules.objectstore;
 
-import java.io.Serializable;
-
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.components.Configuration;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.store.ObjectStore;
 
-import com.sun.istack.Nullable;
+import java.io.Serializable;
 
 @Configuration(configElementName = "config", friendlyName = "ObjectStore Global Element Configuration")
 public class ObjectStoreConfiguration {
@@ -62,7 +60,6 @@ public class ObjectStoreConfiguration {
     @Optional
     private Integer expirationInterval;
 
-    @Nullable
     public String getPartition() {
         return partition;
     }
@@ -87,7 +84,6 @@ public class ObjectStoreConfiguration {
         this.objectStore = objectStore;
     }
 
-    @Nullable
     public Integer getEntryTtl() {
         return entryTtl;
     }
@@ -96,7 +92,6 @@ public class ObjectStoreConfiguration {
         this.entryTtl = entryTtl;
     }
 
-    @Nullable
     public Integer getMaxEntries() {
         return maxEntries;
     }
@@ -105,7 +100,6 @@ public class ObjectStoreConfiguration {
         this.maxEntries = maxEntries;
     }
 
-    @Nullable
     public Integer getExpirationInterval() {
         return expirationInterval;
     }

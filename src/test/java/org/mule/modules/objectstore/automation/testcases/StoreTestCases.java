@@ -5,8 +5,6 @@
  */
 package org.mule.modules.objectstore.automation.testcases;
 
-import static junit.framework.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -15,6 +13,8 @@ import org.mule.modules.objectstore.MulePropertyScope;
 import org.mule.modules.objectstore.ObjectStoreModule;
 import org.mule.modules.objectstore.automation.ObjectStoreTestParent;
 import org.mule.modules.objectstore.automation.RegressionTests;
+
+import static junit.framework.Assert.assertEquals;
 
 public class StoreTestCases extends ObjectStoreTestParent {
 

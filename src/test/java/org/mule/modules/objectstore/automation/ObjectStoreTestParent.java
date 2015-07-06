@@ -16,8 +16,6 @@ public class ObjectStoreTestParent {
 
     protected static final String OBJECTSTORE_KEY = "mykey";
     protected static final String OBJECTSTORE_VALUE = "mulesoft";
-    protected static final String OBJECTSTORE_PARTITION = "test";
-    protected static final String OBJECTSTORE_CONFIG_NAME = "test-partition";
 
     private static final Logger logger = LoggerFactory.getLogger(ObjectStoreTestParent.class);
 

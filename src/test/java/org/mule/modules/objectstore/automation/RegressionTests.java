@@ -5,8 +5,6 @@
  */
 package org.mule.modules.objectstore.automation;
 
-/**
- * Created by teja on 03/07/15.
- */
 public interface RegressionTests {
+
 }
