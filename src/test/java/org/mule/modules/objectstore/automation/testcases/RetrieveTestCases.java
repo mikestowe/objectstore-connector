@@ -43,7 +43,7 @@ public class RetrieveTestCases extends ObjectStoreTestParent {
     public void testRetrieveFail() throws Exception {
 
         ObjectStoreModule module = getModule();
-        String value = (String) module.retrieve("muleion", null, null, MulePropertyScope.INVOCATION, null);
+        module.retrieve("muleion", null, null, MulePropertyScope.INVOCATION, null);
     }
 
     @Category({ RegressionTests.class })
@@ -52,7 +52,7 @@ public class RetrieveTestCases extends ObjectStoreTestParent {
 
         ObjectStoreModule module = getModule();
         module.store(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, true);
-        Thread.sleep(2000L);
+        Thread.sleep(2000);
 
         module.retrieve(OBJECTSTORE_KEY, null, null, MulePropertyScope.INVOCATION, null);
     }
@@ -63,7 +63,7 @@ public class RetrieveTestCases extends ObjectStoreTestParent {
 
         ObjectStoreModule module = getModule();
         module.store(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, true);
-        Thread.sleep(500L);
+        Thread.sleep(50);
 
         String value = (String) module.retrieve(OBJECTSTORE_KEY, null, null, MulePropertyScope.INVOCATION, null);
         assertEquals(OBJECTSTORE_VALUE, value);

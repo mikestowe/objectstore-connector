@@ -68,7 +68,7 @@ public class ObjectStoreModule {
             }
 
             if (config.getObjectStore() == null) {
-                config.setObjectStore((ObjectStore) registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME));
+                config.setObjectStore((ObjectStore<Serializable>) registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME));
             }
 
             if (config.getObjectStore() == null) {

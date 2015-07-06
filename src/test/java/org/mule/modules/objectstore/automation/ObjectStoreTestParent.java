@@ -9,15 +9,11 @@ import org.junit.Before;
 import org.mule.modules.objectstore.ObjectStoreModule;
 import org.mule.tools.devkit.ctf.mockup.ConnectorDispatcher;
 import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ObjectStoreTestParent {
 
     protected static final String OBJECTSTORE_KEY = "mykey";
     protected static final String OBJECTSTORE_VALUE = "mulesoft";
-
-    private static final Logger logger = LoggerFactory.getLogger(ObjectStoreTestParent.class);
 
     private ObjectStoreModule module;
     private ConnectorDispatcher<ObjectStoreModule> dispatcher;
