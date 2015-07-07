@@ -29,8 +29,8 @@ public class AllKeysTestCases extends ObjectStoreTestParent {
 
         assertTrue(keys instanceof List);
         assertEquals(2, ((List<?>) keys).size());
-        assertEquals(OBJECTSTORE_KEY, ((List<?>) keys).get(0));
-        assertEquals("testkey", ((List<?>) keys).get(1));
+        assertTrue( keys.contains(OBJECTSTORE_KEY));
+        assertTrue(keys.contains("testkey"));
     }
 
     @Category({ RegressionTests.class })
