@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
-http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/1.0/mule-objectstore.xsd 
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
-http://www.mulesoft.org/schema/mule/debugger http://www.mulesoft.org/schema/mule/debugger/current/mule-debugger.xsd 
-http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd ">
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.mulesoft.org/schema/mule/core" version="EE-3.3.0" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/1.0/mule-objectstore.xsd
+
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
     <objectstore:config name="Objectstore" partition="PartitionOne" doc:name="Objectstore"/>
     <flow name="ObjectStoreDemoFlow1" doc:name="ObjectStoreDemoFlow1">
         <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="8081" path="test-object-store" doc:name="HTTP"/>
