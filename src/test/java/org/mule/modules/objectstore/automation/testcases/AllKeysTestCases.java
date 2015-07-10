@@ -29,7 +29,7 @@ public class AllKeysTestCases extends ObjectStoreTestParent {
 
         assertTrue(keys instanceof List);
         assertEquals(2, ((List<?>) keys).size());
-        assertTrue( keys.contains(OBJECTSTORE_KEY));
+        assertTrue(keys.contains(OBJECTSTORE_KEY));
         assertTrue(keys.contains("testkey"));
     }
 

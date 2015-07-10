@@ -79,5 +79,27 @@
             </attributes>
             <childElements/>
         </processor>
+        <processor name="retrieveWithLock" xmlName="retrieve-with-lock" caption="Retrieve with lock">
+            <properties>
+                <datamapper input="Object" output="Object"/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="key" use="required" caption="Key" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveStore" xmlName="retrieve-store" caption="Retrieve store">
+            <properties>
+                <datamapper input="Object" output="MulePropertyScope"/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="key" use="required" caption="Key" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="defaultValue-ref" use="required" caption="Default Value Reference" group="General" type="string" javaType="java.lang.Object" category="General"></attribute>
+                <attribute name="storeValue-ref" use="required" caption="Store Value Reference" group="General" type="string" javaType="java.io.Serializable" category="General"></attribute>
+            </attributes>
+        </processor>
     </message-processors>
 </connector>
