@@ -53,6 +53,8 @@ public class ObjectStoreModule {
     private MuleContext muleContext = null;
 
     private String sharedObjectStoreLockId = null;
+    // A reference for cleaner access assigned in init
+    private ObjectStore<Serializable> objectStore;
 
     @PostConstruct
     public void init() {
@@ -69,7 +71,8 @@ public class ObjectStoreModule {
             }
 
             if (config.getObjectStore() == null) {
-                config.setObjectStore((ObjectStore<Serializable>) registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME));
+                ObjectStore<Serializable> objectStore = registry.lookupObject(MuleProperties.DEFAULT_USER_OBJECT_STORE_NAME);
+                config.setObjectStore(objectStore);
             }
 
             if (config.getObjectStore() == null) {
@@ -80,6 +83,7 @@ public class ObjectStoreModule {
         if (sharedObjectStoreLockId == null) {
             sharedObjectStoreLockId = new Random().nextInt(1000) + "-" + System.currentTimeMillis() + "-lock";
         }
+        objectStore = config.getObjectStore();
     }
 
     /**
@@ -105,11 +109,11 @@ public class ObjectStoreModule {
         Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
         lock.lock();
         try {
-            config.getObjectStore().store(key, value);
+            objectStore.store(key, value);
         } catch (ObjectAlreadyExistsException e) {
             if (overwrite) {
-                config.getObjectStore().remove(key);
-                config.getObjectStore().store(key, value);
+                objectStore.remove(key);
+                objectStore.store(key, value);
             } else {
                 throw e;
             }
@@ -145,29 +149,29 @@ public class ObjectStoreModule {
         lock.lock();
         try {
             try {
-                config.getObjectStore().store(key, value);
+                objectStore.store(key, value);
             } catch (ObjectAlreadyExistsException e) {
                 if (overwrite) {
-                    previousValue = config.getObjectStore().retrieve(key);
-                    config.getObjectStore().remove(key);
-                    config.getObjectStore().store(key, value);
+                    previousValue = objectStore.retrieve(key);
+                    objectStore.remove(key);
+                    objectStore.store(key, value);
                 } else {
                     throw e;
                 }
             }
 
             try {
-                config.getObjectStore().store(value, key);
+                objectStore.store(value, key);
             } catch (ObjectAlreadyExistsException e) {
                 if (overwrite) {
                     config.getObjectStore().remove(value);
                     config.getObjectStore().store(value, key);
                 } else {
-                    rollbackDualStore(key, value, previousValue);
+                    rollbackDualStore(key, previousValue);
                     throw e;
                 }
             } catch (Exception e) {
-                rollbackDualStore(key, value, previousValue);
+                rollbackDualStore(key, previousValue);
                 throw new ObjectStoreException(e);
             }
         } finally {
@@ -201,12 +205,12 @@ public class ObjectStoreModule {
     @Processor
     public Object retrieve(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope, MuleMessage muleMessage)
             throws ObjectStoreException {
-        Object ret = null;
+        Object ret;
         try {
-            ret = config.getObjectStore().retrieve(key);
+            ret = objectStore.retrieve(key);
         } catch (ObjectDoesNotExistException ose) {
             if (defaultValue != null) {
-                return defaultValue;
+                ret = defaultValue;
             } else {
                 throw ose;
             }
@@ -214,6 +218,94 @@ public class ObjectStoreModule {
 
         if (targetProperty != null) {
             muleMessage.setProperty(targetProperty, ret, PropertyScope.get(targetScope.value()));
+            ret = muleMessage.getPayload();
+        }
+
+        return ret;
+    }
+
+    /**
+     * Retrieve the given Object with lock.
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve-with-lock}
+     *
+     * @param key
+     *            The identifier of the object to retrieve.
+     * @param defaultValue
+     *            The default value if the key does not exists.
+     * @param targetProperty
+     *            The Mule Message property where the retrieved value will be stored
+     * @param targetScope
+     *            The Mule Message property scope, only used when targetProperty is specified
+     * @param muleMessage
+     *            Injected Mule Message
+     * @return The object associated with the given key. If no object for the given key was found this method throws an {@link org.mule.api.store.ObjectDoesNotExistException}.
+     * @throws ObjectStoreException
+     *             if the given key is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
+     *             if the store is not available or any other implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectDoesNotExistException
+     *             if no value for the given key was previously stored.
+     */
+    @Processor
+    public Object retrieveWithLock(String key, @Optional Object defaultValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope,
+            MuleMessage muleMessage) throws ObjectStoreException {
+
+        Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
+        lock.lock();
+
+        try {
+            return retrieve(key, defaultValue, targetProperty, targetScope, muleMessage);
+        } finally {
+            lock.unlock();
+        }
+
+    }
+
+    /**
+     * Retrieve and Store in the same operation.
+     * <p/>
+     * {@sample.xml ../../../doc/mule-module-objectstore.xml.sample objectstore:retrieve-store}
+     *
+     * @param key
+     *            The identifier of the object to retrieve.
+     * @param defaultValue
+     *            The default value if the key does not exists.
+     * @param storeValue
+     *            The object to store. If you want this to be the payload then use value-ref="#[payload]".
+     * @param targetProperty
+     *            The Mule Message property where the retrieved value will be stored
+     * @param targetScope
+     *            The Mule Message property scope, only used when targetProperty is specified
+     * @param muleMessage
+     *            Injected Mule Message
+     * @return The object associated with the given key. If no object for the given key was found this method returns the defaultValue
+     * @throws ObjectStoreException
+     *             if the given key is <code>null</code>.
+     * @throws org.mule.api.store.ObjectStoreNotAvaliableException
+     *             if the store is not available or any other implementation-specific error occured.
+     * @throws org.mule.api.store.ObjectDoesNotExistException
+     *             if no value for the given key was previously stored.
+     */
+    @Processor
+    public Object retrieveStore(String key, Object defaultValue, Serializable storeValue, @Optional String targetProperty, @Default("INVOCATION") MulePropertyScope targetScope,
+            MuleMessage muleMessage) throws ObjectStoreException {
+
+        Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
+        lock.lock();
+        Object ret;
+
+        ret = retrieve(key, defaultValue, targetProperty, targetScope, muleMessage);
+        try {
+            if (objectStore.contains(key)) {
+                objectStore.remove(key);
+            }
+            objectStore.store(key, storeValue);
+            store(key, storeValue, true);
+        } catch (ObjectStoreException ose) {
+            throw ose;
+        } finally {
+            lock.unlock();
         }
 
         return ret;
@@ -239,7 +331,7 @@ public class ObjectStoreModule {
         Lock lock = muleContext.getLockFactory().createLock(sharedObjectStoreLockId);
         lock.lock();
         try {
-            return config.getObjectStore().remove(key);
+            return objectStore.remove(key);
         } catch (ObjectDoesNotExistException e) {
             if (ignoreNotExists) {
                 return null;
@@ -264,20 +356,19 @@ public class ObjectStoreModule {
      */
     @Processor
     public List<String> allKeys() throws ObjectStoreException {
-        if (config.getObjectStore() instanceof ListableObjectStore) {
-            List<Serializable> allkeys = ((ListableObjectStore<?>) config.getObjectStore()).allKeys();
+        if (objectStore instanceof ListableObjectStore) {
+            List<Serializable> allkeys = ((ListableObjectStore<?>) objectStore).allKeys();
             List<String> list = new ArrayList<String>();
             for (Serializable key : allkeys) {
                 if (key instanceof String) {
                     list.add((String) key);
                 } else {
-                    throw new UnsupportedOperationException("The objectStore [" + config.getObjectStore().getClass().getName() + "] supports only keys of type: "
-                            + String.class.getName());
+                    throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] supports only keys of type: " + String.class.getName());
                 }
             }
             return list;
         } else {
-            throw new UnsupportedOperationException("The objectStore [" + config.getObjectStore().getClass().getName() + "] does not support the operation allKeys");
+            throw new UnsupportedOperationException("The objectStore [" + objectStore.getClass().getName() + "] does not support the operation allKeys");
         }
     }
 
@@ -294,16 +385,16 @@ public class ObjectStoreModule {
      */
     @Processor
     public boolean contains(String key) throws ObjectStoreException {
-        return config.getObjectStore().contains(key);
+        return objectStore.contains(key);
     }
 
     /*
      * This method is executed inside a lock
      */
-    private void rollbackDualStore(String key, Serializable value, Serializable previousValue) throws ObjectStoreException {
+    private void rollbackDualStore(String key, Serializable previousValue) throws ObjectStoreException {
         silentlyDelete(key);
         if (previousValue != null) {
-            config.getObjectStore().store(key, previousValue);
+            objectStore.store(key, previousValue);
         }
     }
 
@@ -311,7 +402,7 @@ public class ObjectStoreModule {
      * This method is executed inside a lock
      */
     private void silentlyDelete(String key) throws ObjectStoreException {
-        config.getObjectStore().remove(key);
+        objectStore.remove(key);
     }
 
     public ObjectStoreConfiguration getConfig() {

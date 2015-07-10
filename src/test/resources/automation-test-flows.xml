@@ -1,0 +1,35 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
+
+    <objectstore:config partition="test" name="test-partition"/>
+
+    <flow name="store">
+        <objectstore:store key="#[flowVars.key]" value-ref="#[flowVars.value]" overwrite="true" config-ref="test-partition"/>
+    </flow>
+
+    <flow name="retrieve">
+        <objectstore:retrieve key="#[flowVars.key]" targetProperty="#[flowVars.propertyName]"
+                            targetScope="INVOCATION" config-ref="test-partition"/>
+    </flow>
+
+    <flow name="retrieveDefaultToVariable">
+        <objectstore:retrieve key="#[flowVars.key2]" defaultValue-ref="#[flowVars.default]" targetScope="INVOCATION"
+                              targetProperty="#[flowVars.propertyName]" config-ref="test-partition"/>
+    </flow>
+
+    <flow name="retrieveVariable">
+        <objectstore:retrieve key="mykey" config-ref="test-partition" targetProperty="targetProperty"
+                              targetScope="SESSION"/>
+    </flow>
+
+    <flow name="remove">
+        <objectstore:remove key="mykey" config-ref="test-partition"/>
+    </flow>
+
+</mule>

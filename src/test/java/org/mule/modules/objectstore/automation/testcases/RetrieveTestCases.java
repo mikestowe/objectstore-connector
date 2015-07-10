@@ -31,6 +31,27 @@ public class RetrieveTestCases extends ObjectStoreTestParent {
 
     @Category({ RegressionTests.class })
     @Test
+    public void testRetrieveWithLock() throws Exception {
+
+        ObjectStoreModule module = getModule();
+        module.store(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);
+        String value = (String) module.retrieveWithLock(OBJECTSTORE_KEY, null, null, MulePropertyScope.INVOCATION, null);
+        assertEquals(OBJECTSTORE_VALUE, value);
+    }
+
+    @Category({ RegressionTests.class })
+    @Test
+    public void testRetrieveStore() throws Exception {
+
+        ObjectStoreModule module = getModule();
+        module.store(OBJECTSTORE_KEY, OBJECTSTORE_VALUE, false);
+        module.retrieveStore(OBJECTSTORE_KEY, null, OBJECTSTORE_VALUE, null, null, null);
+        String value = (String) module.retrieve(OBJECTSTORE_KEY, null, null, MulePropertyScope.INVOCATION, null);
+        assertEquals(OBJECTSTORE_VALUE, value);
+    }
+
+    @Category({ RegressionTests.class })
+    @Test
     public void testRetrieveDefaultValue() throws Exception {
 
         ObjectStoreModule module = getModule();
