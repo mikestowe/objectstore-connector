@@ -86,8 +86,9 @@
                 <query-support>false</query-support>
             </properties>
             <attributes>
-                <attribute name="key" use="required" caption="Key" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="key" use="required" caption="Key" group="General" type="string" javaType="java.lang.String" category="General">Test-Key</attribute>
             </attributes>
+            <childElements/>
         </processor>
         <processor name="retrieveStore" xmlName="retrieve-store" caption="Retrieve store">
             <properties>
@@ -96,10 +97,11 @@
                 <query-support>false</query-support>
             </properties>
             <attributes>
-                <attribute name="key" use="required" caption="Key" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
-                <attribute name="defaultValue-ref" use="required" caption="Default Value Reference" group="General" type="string" javaType="java.lang.Object" category="General"></attribute>
-                <attribute name="storeValue-ref" use="required" caption="Store Value Reference" group="General" type="string" javaType="java.io.Serializable" category="General"></attribute>
+                <attribute name="key" use="required" caption="Key" group="General" type="string" javaType="java.lang.String" category="General">Test-Key</attribute>
+                <attribute name="defaultValue-ref" use="required" caption="Default Value Reference" group="General" type="string" javaType="java.lang.Object" category="General">Test-Value</attribute>
+                <attribute name="storeValue-ref" use="required" caption="Store Value Reference" group="General" type="string" javaType="java.io.Serializable" category="General">Test-Value</attribute>
             </attributes>
+            <childElements/>
         </processor>
     </message-processors>
 </connector>

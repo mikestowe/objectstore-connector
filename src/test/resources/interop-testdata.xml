@@ -103,6 +103,7 @@
                 <attribute name="targetProperty" use="optional" caption="Target Property" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
                 <attribute name="targetScope" use="optional" caption="Target Scope" group="General" type="enum" javaType="org.mule.modules.objectstore.MulePropertyScope" default="INVOCATION" category="General"></attribute>
             </attributes>
+            <childElements/>
         </processor>
         <processor name="retrieveStore" xmlName="retrieve-store" caption="Retrieve store">
             <properties>
@@ -117,6 +118,7 @@
                 <attribute name="targetProperty" use="optional" caption="Target Property" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
                 <attribute name="targetScope" use="optional" caption="Target Scope" group="General" type="enum" javaType="org.mule.modules.objectstore.MulePropertyScope" default="INVOCATION" category="General"></attribute>
             </attributes>
+            <childElements/>
         </processor>
     </message-processors>
 </connector>
