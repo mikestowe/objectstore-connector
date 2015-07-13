@@ -7,6 +7,12 @@
 <!-- BEGIN_INCLUDE(objectstore:retrieve) -->
 <objectstore:retrieve key="mykey" defaultValue-ref="#[string:myValue]" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:retrieve) -->
+<!-- BEGIN_INCLUDE(objectstore:retrieve-with-lock) -->
+<objectstore:retrieve-with-lock key="mykey" defaultValue-ref="#[string:myValue]" config-ref="config-name"/>
+<!-- END_INCLUDE(objectstore:retrieve-with-lock) -->
+<!-- BEGIN_INCLUDE(objectstore:retrieve-store) -->
+<objectstore:retrieve-store key="mykey" defaultValue-ref="#[string:myValue]" storeValue-ref="#[string:myValue]" config-ref="config-name"/>
+<!-- END_INCLUDE(objectstore:retrieve-store) -->
 <!-- BEGIN_INCLUDE(objectstore:remove) -->
 <objectstore:remove key="mykey" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:remove) -->
@@ -16,9 +22,3 @@
 <!-- BEGIN_INCLUDE(objectstore:contains) -->
 <objectstore:contains key="mykey" config-ref="config-name"/>
 <!-- END_INCLUDE(objectstore:contains) -->
-<!-- BEGIN_INCLUDE(objectstore:retrieve-with-lock) -->
-<objectstore:retrieve-with-lock key="mykey" defaultValue-ref="myvalue"/>
-<!-- END_INCLUDE(objectstore:retrieve-with-lock) -->
-<!-- BEGIN_INCLUDE(objectstore:retrieve-store) -->
-<objectstore:retrieve-store key="mykey" defaultValue-ref="myvalue" storeValue-ref="myvalue"/>
-<!-- END_INCLUDE(objectstore:retrieve-store) -->
