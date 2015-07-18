@@ -15,7 +15,7 @@ import org.mule.transport.NullPayload;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-public class RemoveTestCases extends AbstractTestClass {
+public class RemoveTestCases extends AbstractTestCase {
 
     @Before
     public void setUp() throws Exception {

@@ -13,7 +13,7 @@ import org.mule.modules.objectstore.ObjectStoreConnector;
 
 import static junit.framework.Assert.assertEquals;
 
-public class DualStoreTestCases extends AbstractTestClass {
+public class DualStoreTestCases extends AbstractTestCase {
 
     @Test
     public void testDualStore() throws Exception {

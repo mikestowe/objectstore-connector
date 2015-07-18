@@ -14,7 +14,7 @@ import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
-public class AllKeysTestCases extends AbstractTestClass {
+public class AllKeysTestCases extends AbstractTestCase {
 
     @Test
     public void testAllKeys() throws Exception {

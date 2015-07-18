@@ -11,7 +11,7 @@ import org.mule.modules.objectstore.ObjectStoreConnector;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-public class ContainsTestCases extends AbstractTestClass {
+public class ContainsTestCases extends AbstractTestCase {
 
     @Test
     public void testContains() throws Exception {

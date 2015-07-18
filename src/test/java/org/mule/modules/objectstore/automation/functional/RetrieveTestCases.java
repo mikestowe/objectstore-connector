@@ -14,7 +14,7 @@ import org.mule.modules.objectstore.ObjectStoreConnector;
 
 import static junit.framework.Assert.assertEquals;
 
-public class RetrieveTestCases extends AbstractTestClass {
+public class RetrieveTestCases extends AbstractTestCase {
 
     @Test
     public void testRetrieve() throws Exception {

@@ -8,12 +8,12 @@ package org.mule.modules.objectstore.automation.functional;
 import org.mule.modules.objectstore.ObjectStoreConnector;
 import org.mule.tools.devkit.ctf.junit.AbstractTestCase;
 
-abstract class AbstractTestClass extends AbstractTestCase<ObjectStoreConnector> {
+abstract class AbstractTestCase extends org.mule.tools.devkit.ctf.junit.AbstractTestCase<ObjectStoreConnector> {
 
     protected static final String OBJECTSTORE_KEY = "mykey";
     protected static final String OBJECTSTORE_VALUE = "mulesoft";
 
-    public AbstractTestClass() {
+    public AbstractTestCase() {
         this.setConnectorClass(ObjectStoreConnector.class);
     }
 
