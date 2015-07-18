@@ -11,6 +11,6 @@ import org.mule.modules.objectstore.automation.functional.legacy.RetrieveTestCas
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ RetrieveTestCases.class })
-public class LegacyRegressionTestSuite {
+public class LegacyTestSuite {
 
 }
