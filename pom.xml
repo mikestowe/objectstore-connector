@@ -19,6 +19,7 @@
         <licensePath>LICENSE.md</licensePath>
         <strictChecking>true</strictChecking>
         <devkit.studio.package.skip>false</devkit.studio.package.skip>
+        <jdk.version>1.6</jdk.version>
     </properties>
 
     <dependencies>
