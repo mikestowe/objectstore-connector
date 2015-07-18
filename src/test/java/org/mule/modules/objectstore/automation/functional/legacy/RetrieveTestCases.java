@@ -12,6 +12,9 @@ import org.mule.modules.tests.ConnectorTestCase;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Could not migrated due to the fact that the objectStore retrieve processor can retrieve the value of the key to properties(session, invocation)
+ */
 public class RetrieveTestCases extends ConnectorTestCase {
 
     @Before
