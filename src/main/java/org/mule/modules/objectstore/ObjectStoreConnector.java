@@ -9,7 +9,6 @@ package org.mule.modules.objectstore;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.annotations.Category;
-import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
@@ -35,13 +34,12 @@ import java.util.concurrent.locks.Lock;
  *
  * @author MuleSoft, Inc.
  */
-// Using @Connector instead of @Module due to bug in Connector Testing framework - DEVKIT-1840
 @Connector(name = "objectstore", schemaVersion = "1.0", friendlyName = "ObjectStore", description = "ObjectStore Module")
 @Category(name = "org.mule.tooling.category.transformers", description = "Transformers")
-public class ObjectStoreModule {
+public class ObjectStoreConnector {
 
-    @Config
-    private ObjectStoreConfiguration config;
+    @org.mule.api.annotations.Config
+    private Config config;
 
     @Inject
     private Registry registry;
@@ -405,11 +403,11 @@ public class ObjectStoreModule {
         objectStore.remove(key);
     }
 
-    public ObjectStoreConfiguration getConfig() {
+    public Config getConfig() {
         return config;
     }
 
-    public void setConfig(ObjectStoreConfiguration config) {
+    public void setConfig(Config config) {
         this.config = config;
     }
 

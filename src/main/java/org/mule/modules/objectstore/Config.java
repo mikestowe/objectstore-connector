@@ -14,8 +14,8 @@ import org.mule.api.store.ObjectStore;
 
 import java.io.Serializable;
 
-@Configuration(configElementName = "config", friendlyName = "ObjectStore Global Element Configuration")
-public class ObjectStoreConfiguration {
+@Configuration(configElementName = "config", friendlyName = "Configuration")
+public class Config {
 
     /**
      * Name of the partition in the default in-memory or persistent object stores (this argument has no meaning if the object store is passed by ref using objectStore-ref)
