@@ -6,7 +6,6 @@
 package org.mule.modules.objectstore.automation.functional;
 
 import org.mule.modules.objectstore.ObjectStoreConnector;
-import org.mule.tools.devkit.ctf.junit.AbstractTestCase;
 
 abstract class AbstractTestCase extends org.mule.tools.devkit.ctf.junit.AbstractTestCase<ObjectStoreConnector> {
 
