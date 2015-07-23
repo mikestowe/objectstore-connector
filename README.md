@@ -6,7 +6,7 @@ The Object Store Module will allow manipulate object stores within Mule. It can 
 Installation and Usage
 ----------------------
 
-For information about usage and installation you can check our documentation at http://mulesoft.github.com/mule-module-objectstore
+For information about usage and installation you can check our documentation at https://developer.mulesoft.com/docs/display/current/Mule+Object+Stores
 
 Reporting Issues
 ----------------
